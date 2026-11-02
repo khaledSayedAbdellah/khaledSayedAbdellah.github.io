@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Khaled Sayed</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Khaled Sayed — Senior Flutter Developer. 8 years building mobile apps, 30 production apps shipped across iOS, Android, web and desktop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: split hero (intro + a phone home screen of shipped apps) → filterable project grid → experience timeline → skills → contact */
+:root{
+  --bg:#F3F6FA; --surface:#FFFFFF; --ink:#0F1A2B; --muted:#5A6678; --line:#DCE3EC;
+  --accent:#0B63CE; --accent-ink:#FFFFFF; --accent-soft:#E2EDFB;
+  --bezel:#0D141F; --screen-a:#1B3E73; --screen-b:#0B63CE; --screen-ink:#FFFFFF;
+  --shadow:0 1px 2px rgb(15 26 43 / .06), 0 8px 24px rgb(15 26 43 / .06);
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1019; --surface:#111A27; --ink:#E6ECF4; --muted:#93A1B4; --line:#213044;
+    --accent:#5CA8FF; --accent-ink:#06101D; --accent-soft:#13263F;
+    --bezel:#000000; --screen-a:#0E2546; --screen-b:#1C5DB0; --screen-ink:#FFFFFF;
+    --shadow:0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1019; --surface:#111A27; --ink:#E6ECF4; --muted:#93A1B4; --line:#213044;
+  --accent:#5CA8FF; --accent-ink:#06101D; --accent-soft:#13263F;
+  --bezel:#000000; --screen-a:#0E2546; --screen-b:#1C5DB0; --screen-ink:#FFFFFF;
+  --shadow:0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .25);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand .dot{width:28px;height:28px;border-radius:8px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.8rem}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{color:var(--muted);text-decoration:none;font-size:.92rem;padding:6px 10px;border-radius:8px}
+.nav ul a:hover{color:var(--ink);background:var(--accent-soft)}
+@media (max-width:640px){.nav ul li:not(:last-child){display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:56px;align-items:center;padding-block:64px 56px}
+@media (max-width:880px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:40px;padding-block:40px}}
+.avail{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:4px 12px 4px 8px;border-radius:99px}
+.avail i{width:8px;height:8px;border-radius:50%;background:#1FA463;box-shadow:0 0 0 3px rgb(31 164 99 / .2)}
+.hero h1{font-size:clamp(2.6rem, 6vw, 4.4rem);font-weight:800;letter-spacing:-.03em;margin-top:18px}
+.hero h1 span{color:var(--accent)}
+.role{font-family:var(--f-display);font-weight:500;font-size:clamp(1.2rem,2.4vw,1.55rem);color:var(--muted);margin-top:10px}
+.lede{max-width:56ch;margin:20px 0 0;font-size:1.06rem}
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin:28px 0 0;padding:0;list-style:none}
+.stats li{display:flex;flex-direction:column}
+.stats b{font-family:var(--f-display);font-size:1.9rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:.85rem;color:var(--muted);margin-top:4px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .95rem var(--f-body);padding:11px 18px;border-radius:10px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface);cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* phone */
+.phone-col{display:flex;justify-content:center}
+.phone{width:min(330px,100%);aspect-ratio:9/18.5;max-width:100%;background:var(--bezel);border-radius:46px;padding:11px;box-shadow:0 30px 60px -20px rgb(11 99 206 / .35), var(--shadow)}
+.screen{height:100%;border-radius:36px;background:linear-gradient(160deg,var(--screen-a),var(--screen-b));color:var(--screen-ink);padding:14px 16px 16px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.sbar{display:flex;justify-content:space-between;align-items:center;font:600 .78rem var(--f-body);padding:2px 10px 0}
+.island{width:86px;height:24px;background:var(--bezel);border-radius:20px}
+.sbar .sig{display:flex;gap:2px;align-items:flex-end}
+.sbar .sig i{width:3px;background:var(--screen-ink);border-radius:1px}
+.widget{margin:16px 2px 14px;background:rgb(255 255 255 / .14);border-radius:18px;padding:12px 14px;font-family:var(--f-mono);font-size:.7rem;line-height:1.5;backdrop-filter:blur(6px)}
+.widget .k{color:#9CD0FF}.widget .s{color:#FFD58A}
+.grid-apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px;align-content:start;flex:1}
+.app{background:none;border:0;padding:0;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.app .ic{width:100%;max-width:54px;aspect-ratio:1;border-radius:24%;overflow:hidden;font:700 1rem var(--f-display);display:grid;place-items:center;color:#fff;box-shadow:0 2px 6px rgb(0 0 0 / .25);transition:transform .15s}
+.app:hover .ic{transform:translateY(-2px) scale(1.05)}
+.app small{font-size:.62rem;line-height:1.1;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dock{margin-top:10px;background:rgb(255 255 255 / .16);border-radius:22px;padding:9px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.dock .app small{display:none}
+
+/* sections */
+section{padding-block:72px 8px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:700;letter-spacing:-.02em;margin-top:6px}
+.sec-head p{margin:8px 0 0;color:var(--muted);max-width:56ch}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:99px;cursor:pointer}
+.chip .n{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);margin-left:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] .n{color:var(--bg);opacity:.7}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0;scroll-margin-top:90px;transition:border-color .2s, box-shadow .2s}
+.card.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.card-top{display:flex;gap:14px;align-items:center}
+.card .ic{width:52px;height:52px;flex:none;border-radius:13px;font:700 1.05rem var(--f-display);display:grid;place-items:center;color:#fff;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.ic img{width:100%;height:100%;object-fit:cover;display:block}
+.card h3{font-size:1.2rem;font-weight:700}
+.meta{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);margin-top:3px;letter-spacing:.02em}
+.card p{margin:0;font-size:.95rem;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.tag{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 8px}
+.stores{display:flex;flex-wrap:wrap;gap:8px}
+.store{display:inline-flex;align-items:center;gap:6px;font:600 .8rem var(--f-body);text-decoration:none;color:var(--accent);background:var(--accent-soft);padding:6px 11px;border-radius:8px}
+.store:hover{text-decoration:underline}
+.store svg{width:13px;height:13px}
+.private{font-size:.8rem;color:var(--muted)}
+
+/* experience */
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.job{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding:22px 0;border-top:1px solid var(--line)}
+.job:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:700px){.job{grid-template-columns:minmax(0,1fr);gap:6px}}
+.when{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:4px}
+.when .now{display:inline-block;margin-left:6px;color:var(--accent);font-weight:500}
+.job h3{font-size:1.2rem;font-weight:700}
+.job h3 em{font-style:normal;color:var(--accent)}
+.co{color:var(--muted);font-size:.92rem;margin-top:4px}
+.job ul{margin:10px 0 0;padding-left:18px}
+.job li{margin:3px 0}
+.job .ships{font-size:.85rem;color:var(--muted);margin-top:8px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:16px}
+.sk{border-top:2px solid var(--ink);padding-top:14px}
+.sk h3{font-size:1rem;font-weight:700}
+.sk ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.sk li{font-size:.85rem;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:3px 9px}
+
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin-top:40px}
+.edu > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.edu h3{font-size:1.05rem}
+.edu p{margin:6px 0 0;color:var(--muted);font-size:.92rem}
+.lang{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:.95rem}
+.lang span:last-child{color:var(--muted)}
+
+/* contact */
+.contact{margin-top:72px;background:var(--ink);color:var(--bg)}
+.contact .wrap{padding-block:56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+@media (max-width:800px){.contact .wrap{grid-template-columns:minmax(0,1fr)}}
+.contact h2{font-size:clamp(2rem,4.4vw,3rem);font-weight:800;letter-spacing:-.02em}
+.contact p{opacity:.75;margin:12px 0 0;max-width:48ch}
+.clist{display:grid;gap:10px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid color-mix(in srgb, var(--bg) 22%, transparent);border-radius:12px;padding:12px 14px;min-width:0}
+.crow .lbl{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
+.crow .val{font-weight:600;overflow-wrap:anywhere;user-select:all}
+.crow a.val{color:var(--bg);text-decoration:none;user-select:auto}
+.crow a.val:hover{text-decoration:underline}
+.copy{flex:none;font:600 .8rem var(--f-body);background:var(--bg);color:var(--ink);border:0;border-radius:8px;padding:7px 12px;cursor:pointer}
+footer{background:var(--ink);color:var(--bg)}
+footer .wrap{padding-block:18px 28px;font-size:.82rem;opacity:.6;border-top:1px solid color-mix(in srgb, var(--bg) 15%, transparent)}
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot">KS</span>Khaled Sayed</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a class="btn primary" style="padding:6px 14px" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="avail"><i></i>Mobile Team Lead at Aldrees · Cairo, Egypt</span>
+      <h1>Khaled <span>Sayed</span></h1>
+      <div class="role">Mobile Team Lead · Senior Flutter Engineer</div>
+      <p class="lede">I build Flutter apps for mobile, web and desktop, and keep them fast and stable after launch. My work spans Saudi government platforms, ERP and accounting systems, low-code tools, marketplaces and social apps. I care about scalable architecture, offline-first data, performance and mentoring the team around me.</p>
+      <ul class="stats">
+        <li><b>8</b><span>years in software</span></li>
+        <li><b>7</b><span>years in Flutter</span></li>
+        <li><b>30</b><span>production apps</span></li>
+        <li><b>4</b><span>platforms: iOS · Android · Web · Desktop</span></li>
+      </ul>
+      <div class="cta">
+        <a class="btn primary" href="#work">See my work
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
+        <a class="btn" href="https://www.linkedin.com/in/khaledsayedabdellah/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/khaledSayedAbdellah" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="phone-col">
+      <div class="phone" aria-label="Home screen of apps I have shipped">
+        <div class="screen">
+          <div class="sbar"><span>9:41</span><span class="island"></span><span class="sig"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:10px"></i></span></div>
+          <div class="widget" aria-hidden="true"><span class="k">final</span> me = Developer(<br>&nbsp;&nbsp;stack: <span class="s">'Flutter · Dart'</span>,<br>&nbsp;&nbsp;state: <span class="s">'BLoC · Riverpod'</span>,<br>&nbsp;&nbsp;shipped: 30,<br>);</div>
+          <div class="grid-apps" id="homeGrid"></div>
+          <div class="dock" id="dock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Selected work</div>
+          <h2>Apps in production</h2>
+          <p>A selection of the products I built or helped build, most of them live on the App Store and Google Play. Tap an icon on the phone above to jump to its card.</p>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter projects"></div>
+      </div>
+      <div class="projects" id="projects"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Experience</div>
+        <h2>Where I've worked</h2>
+      </div></div>
+      <ol class="timeline">
+        <li class="job"><div class="when">08/2026 – Present<span class="now">● now</span></div><div>
+          <h3>Mobile Team Lead · <em>Aldrees</em></h3>
+          <div class="co">Aldrees Petroleum &amp; Transport Services Company · Full-time · Hybrid</div>
+          <ul><li>Leading the mobile team and owning the delivery of the company's mobile apps.</li><li>Setting architecture, code-review and release standards for the team.</li></ul>
+          <div class="ships">Shipped: Aldrees Workspace, Aldrees</div>
+        </div></li>
+        <li class="job"><div class="when">06/2026 – 09/2026</div><div>
+          <h3>Senior Mobile Developer · <em>Daftra</em></h3>
+          <div class="co">Smart Village, Giza · Hybrid · Cloud ERP for accounting, sales, inventory, CRM and HR</div>
+          <ul><li>Optimized application performance, stability and user experience.</li><li>Delivered new features and product enhancements with cross-functional teams.</li></ul>
+          <div class="ships">Shipped: Daftra</div>
+        </div></li>
+        <li class="job"><div class="when">06/2025 – 06/2026</div><div>
+          <h3>Senior Flutter Developer · <em>Elm Company</em></h3>
+          <div class="co">Giza, Egypt · Saudi technology company serving 60,000 public and private sector clients</div>
+          <ul><li>Developed and maintained a large-scale government digital platform.</li><li>Improved performance and shipped new features for a government application.</li></ul>
+          <div class="ships">Shipped: HAWI</div>
+        </div></li>
+        <li class="job"><div class="when">05/2024 – 06/2025</div><div>
+          <h3>Senior Flutter Developer · <em>NTG Clarity</em></h3>
+          <div class="co">Giza, Egypt · IT services and solutions provider in Canada and the Middle East</div>
+          <ul><li>Improved application performance and memory usage.</li><li>Refactored legacy modules into a scalable architecture.</li><li>Worked with backend and QA teams to raise delivery quality.</li></ul>
+          <div class="ships">Shipped: NTG apps</div>
+        </div></li>
+        <li class="job"><div class="when">03/2022 – 04/2024</div><div>
+          <h3>Senior Flutter Developer · <em>Mele SBS</em></h3>
+          <div class="co">Heliopolis, Cairo · Marketing and software studio</div>
+          <ul><li>Led the Flutter team delivering multiple production applications.</li><li>Designed scalable, maintainable Flutter solutions.</li><li>Mentored junior developers and ran code reviews.</li></ul>
+          <div class="ships">Shipped: Mele ERP, RAQIB, iLibrary, Finds</div>
+        </div></li>
+        <li class="job"><div class="when">09/2021 – 03/2022</div><div>
+          <h3>Senior Flutter Developer · <em>Almedad Soft</em></h3>
+          <div class="co">Nasr City, Cairo · ERP software</div>
+          <ul><li>Built and delivered 5 applications from scratch.</li></ul>
+        </div></li>
+        <li class="job"><div class="when">01/2020 – 09/2021</div><div>
+          <h3>Flutter Developer · <em>Al Rowad</em></h3>
+          <div class="co">Cairo · Software house</div>
+          <ul><li>Built and published 6 production applications from scratch.</li></ul>
+          <div class="ships">Shipped: Afkar, InSure, Go Taxi, Go Talabat and more</div>
+        </div></li>
+        <li class="job"><div class="when">01/2019 – 01/2020</div><div>
+          <h3>Flutter Developer · <em>Digital Transformation</em></h3>
+          <div class="co">Giza · Custom software and mobile apps</div>
+          <ul><li>Built and published 4 production applications from scratch.</li></ul>
+        </div></li>
+        <li class="job"><div class="when">01/2018 – 01/2019</div><div>
+          <h3>Android Developer (Java) · <em>SoftCode</em></h3>
+          <div class="co">Remote · Android, IoT and e-commerce</div>
+          <ul><li>Integrated Firebase and worked with hardware engineers on IoT solutions.</li></ul>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Skills</div>
+        <h2>What I work with</h2>
+      </div></div>
+      <div class="skills">
+        <div class="sk"><h3>Flutter &amp; mobile</h3><ul><li>Flutter</li><li>Dart</li><li>Responsive UI</li><li>Offline storage</li><li>Push notifications</li><li>Crashlytics</li><li>Java (Android)</li></ul></div>
+        <div class="sk"><h3>State &amp; architecture</h3><ul><li>BLoC</li><li>Cubit</li><li>Provider</li><li>Riverpod</li><li>Clean architecture</li><li>Design patterns</li><li>SOLID</li><li>Dependency injection (GetIt)</li></ul></div>
+        <div class="sk"><h3>Data &amp; backend</h3><ul><li>REST APIs</li><li>WebSockets</li><li>Firebase</li><li>SQLite</li><li>Hive</li><li>SQL</li><li>MongoDB</li><li>Node.js</li><li>C#</li></ul></div>
+        <div class="sk"><h3>Quality &amp; delivery</h3><ul><li>Performance optimization</li><li>Memory management</li><li>Unit testing</li><li>Debugging</li><li>CI/CD</li><li>Git</li><li>SDLC</li></ul></div>
+        <div class="sk"><h3>Leadership</h3><ul><li>Team leadership</li><li>Mentoring</li><li>Code review</li><li>Problem solving</li><li>Critical thinking</li><li>Teamwork</li></ul></div>
+      </div>
+      <div class="edu">
+        <div><div class="eyebrow">Education</div><h3 style="margin-top:8px">Bachelor of Computer Science</h3><p>6 October University · 2015 – 2019</p></div>
+        <div><div class="eyebrow">Training</div><h3 style="margin-top:8px">ITI, Front-End &amp; Cross-Platform</h3><p>Information Technology Institute · 10/2020 – 01/2021</p></div>
+        <div><div class="eyebrow">Languages</div><div class="lang"><span>Arabic</span><span>Native</span></div><div class="lang"><span>English</span><span>Proficient</span></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" style="color:inherit;opacity:.65">Contact</div>
+      <h2>Let's build your next app.</h2>
+      <p>Open to senior Flutter and mobile lead roles, and to product work. The quickest way to reach me is email or WhatsApp.</p>
+    </div>
+    <div class="clist">
+      <div class="crow"><div style="min-width:0"><div class="lbl">Email</div><div class="val" id="email">khaled.s.abdellah@gmail.com</div></div><button class="copy" type="button" id="copy-email" data-copy="email">Copy</button></div>
+      <div class="crow"><div style="min-width:0"><div class="lbl">Phone / WhatsApp</div><div class="val" id="phone">+20 103 262 6346</div></div><button class="copy" type="button" id="copy-phone" data-copy="phone">Copy</button></div>
+      <div class="crow"><div style="min-width:0"><div class="lbl">LinkedIn</div><a class="val" href="https://www.linkedin.com/in/khaledsayedabdellah/" target="_blank" rel="noopener">in/khaledsayedabdellah</a></div></div>
+      <div class="crow"><div style="min-width:0"><div class="lbl">GitHub</div><a class="val" href="https://github.com/khaledSayedAbdellah" target="_blank" rel="noopener">github.com/khaledSayedAbdellah</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">© 2026 Khaled Sayed · Built with care in Cairo</div></footer>
+
+<script>
+const ICONS = {"daftra":"data:image/webp;base64,UklGRv4BAABXRUJQVlA4IPIBAADQDQCdASpIAEgAPnk2mEckoyKhLNTaqJAPCWQAz9m0vy/wH5Ac9pxhuRcoB6l/MB+wHrD9Dp1EvoAdLD5SDRAH1y5pGotL+rkhR67J3wNufhVlDUboCa/dXw1JKdHnGvH6Rz37tLmUN3i52SL3oYGYqCUC3MY6gAD+7nZ/+5wPZwPZwPBD/zYFFTngVCyNuCC3a5Aou4eP6lzRUefufwpva/F8wWHkdWUnonRCBwU7N3OmCpbZRTWhqUaBq/3zhp1uMSPEQwcn95mmkudLwAIW82EoRHYOs62gC9A8Btki7jlY/nsnPhP1dDN8zJrCgIPxWAprWFMHWnSFa3g+/uqnfQe/0oiQgCM15r6Nmx8QDJbT8rLOFn1f/gmvKLkLiNtfo+mwFHCm+y2XdImcGmIZar5+S3Sgvejn1vWiWEHbzuo6eQvcJQI+AhYmtxyGEx08oSpaIxnSE2tSX4ca5malCXqmVfcCBKkOun3Sm72ss+AhEu0UpByNaCJ5KY4KeY8vfpMHRiANeY+CgMiFUcR/rLWdSN2kqzOGBWHJkI4lsRB5o7vOGYIR9fQTBhBScfDYB5LqBaOyfu8zgOtib09oyExIPn/u/pBTMAtV0P5Aq4kGrsLVW+3S1DWLFTcbTD1cmGRg1eOkthIsWwJR6AAAAAA=","hawi":"data:image/webp;base64,UklGRiQDAABXRUJQVlA4IBgDAAAQEACdASpIAEgAPnk2lkikoqIhKPJLiJAPCUAZ77QG2z8wHQA8oDrAPQA6T/InWB/3O/3b9qwHxA0i9JBMv8bL4r9lTpFbeG4YC3DGvPNJtEyB98RmhqZsWZ5RtsUo7gzL9PpQ0JcOGFmeBOAuj7rg+KchgOmrV21JsKPCnVlQdA3sBHWIq80UAAD+/AZE8fdFfs8/6Hez7XtK551J7/0W2KW3vd/tfSLPEEbnFmAM/88K1LDuAHwgqvT/bjksUuZAUYym35tmzM1KkPQtwjpH+abvauVt3RF2UhN9Q3ITaRqBDZnMK4bynWyRcqsq/c9cUqH0W/5AsAZoHf0g192K3x/wZiZ2o4dqkzzYWXLCpjktAqZ//L9sBgUBhQZohiX+OVS+EuRkv7JWezgu+lgjrApiTlBcjkRhaQcdKBW+KSCZ17mKNgJOLWw3D39A8fiuXv61PnqO2gZdglRMMsDLFJhWH9zxwLhfQcfBSFQOR/1q802h9Y0BwuWUh8Yha08BbcTHlgAm1PY3IvbhizxTaM9tS6Ci/EokZSC3fg0vJb7ZaQjkQhfWeQ/8p9ZTBuW7gbjsEr9En+1n2ZG/o6r22SBnWgkA7PzXvk5Kh2svTvNgyx8euf1rXGFjgNb6vGPg6WVhGQOE3zPs9ix33QZe4E3C94BMKI18eThX3W6H8bel2IDtuQM3YH8FLGL/EuDwdmGA+CsKlJ5/rw+PujqCs9Okha5EYjyyU2fU/18fYwO98/HUa37OF2FfvvChI/TeSD7khGecv5/4/8Ygzm02ajqyG/LsD4Ze8Oz+bvCDjCRNQLAzokcGgl/L69WDa+3l0e6WdR8qmiQMr54oLSWuf8Fdv80T5xuXE2q3w5ni3d+mEvPifN7MCpOt99HDfGOvpT2lxMekt1auioD+kEpwJIMGF5+Z9P5ese78tUBmM0Jt8scIDvNcTvP/fNhIQN/rmwjDGTjSUKoYyG491ObHO/cUNoxuXznw0zK4BhvcNp4LVSX+YvAzvqqu5DkHOd9h7F5o1G6i/LnK+wmUsH2szn+zQAAAAAA=","ntg":"data:image/webp;base64,UklGRrICAABXRUJQVlA4IKYCAAAwDwCdASpIAEgAPnk8mEkkoyKhIosgkA8JZQBTBsAPAAyyv0AOlK/ar0jqXl23blbcF4Qd4B/D90I5B/QuIDSZYwP9V6ZWdT6k9gX+U7yATI47u1s2nIzuUcetrEBn9/y4lBgd0GH4NlmyfEYxGyNb0060fT+4NmJhCuVezxu995zAAP772AHX/bP0VGfuI5hNMiQjZZLymPJ33+YyVxQCDVP/M8G53+J2IC9xo6+HwFM2mRN+x8i71pJTz2N1MgYEb/H7u4wxvoRPymLfjaAitTP2rs9jITnmcJokvBc/amu49PGb+L85C5h/+z/xi/9FvhT2b/t5I/9sLqq18TxCv7clME+o5+c/8CJ/UAKEiGVRp5AR4X5SLrNXkuD7rG+UE6gB8UkzjMZTTj5ELPegeqqJA5T2DPHONxyHf8EPDby2veHVkR3/9XpO5fgCa6uM18N9zEryX95A1arJ09n9yITnX+sXDa2kFFCWn3RWoyEbR898DQAVKseYiGNAG9DgDyq1rOZZqKFCqygPQlXJ4MN3amNx01pje4StyX6S97/4RtZ3CmuXP/jERm7/R3r+m4Kk/6008mJyrK4E/2LxoBYnaOt77dp5Yd6XvxrEfLSCe8H1whmzgltm+l39ixvh1dI3wmSmGLir/C2/QFPbtPJoshr/B7vbH0Wej9gql32+572E1z20QyQHBVXsws3PSwBivoeS2E0t1vt+IcI2RNTXLqONni/3nAuun+LY3AQiPHo00nqxJwZWX23kSnyG4EkV5gw7TuiIcF2GDLJbxvKMu9ztFc6tbghLpPq5Fw3cUviI7RXQnIIeyTzPLs+qKgJwc+uz722cG7v4KY/6R8owSSbLPYLYSF08JE7Jw+TzTZqBY9AbpAYZOc0OGAGTXSBIAAA=","incentify":"data:image/webp;base64,UklGRj4CAABXRUJQVlA4WAoAAAAQAAAARwAARwAAQUxQSCsAAAABH/D+/4iIhqIAIBwjiKqiiaKJ2/PnFdH/CYi5wNhgP4HQAf5DD0Ae8ZgDAFZQOCDsAQAA0AsAnQEqSABIAD55OpZHpKOiISzWaRCQDwliANEGDT5HHemmhfsDoZYGk1mb+Oh7uaSRIzLT1GPFM+mq9Roz11ddOqTc9KnIYWDa0Ve4QgHSd5OmYyDMfQMBJNDabgMgT0Ley+iXiAD+/EoDx59+w47xMAkmVrddcqkJCSML1EIH/IE69SamjexYhQ8M29sZd+T8aQP6OYFAjh/coEjnyDz3Gf3bu396r+K8vcgR8eCkGr7fsm9BidMY5nqCvFr4BAY13ynGwNVf9yM4d4OGm304LF0ZmYGrucHmnBUueqbA96BJeuOPQTYxnaP9SNWmqScpm4w6wnpRYba2aarKg6VSx8sGhWcHk8y072LW9Nck7yNaRhQ7JPoadj8cF61MPESvyowtPCLUj7X9jRVapTw5nFb0Y0DjxqRyRJaYANJYPuBH/06evwPi4GkiHBBp5ly2QR4UQORJ3dtMA4+j5xp6+yauxNfj7f9llP3uBQ7nQcbQYuvKat68Dx0aIzgl+H9s1xBPOvhNcr+/0cJVDybGB3XCfAcpkwnFbVvd6pfNYQn+Tz9XH/9s6oV5rbbiYpUZaFd0/lFy1D+VRB1i+e0+9CKim16UIeXafxk4xdlAUbp6UISrT2P6M03dYHsYHGaa1fqzjgn4AAAA","ilibrary":"data:image/webp;base64,UklGRt4BAABXRUJQVlA4INIBAACQCwCdASpIAEgAPnk8mUkko6KhIopwkA8JQArI+4HlK8YYQDzAeTl+gHul83TqFP2A9gD9SfTW9jIiMxqvLdzfAecQSA76Me6WqiG26HD+x3Ifsy88wBvNUQXVPhjSsT7CRm3sAAD++jPFgdwXg3zeQWo9pT5Os0xDQI3yr91wze5E35Fqkvtj3Vyw3x6bhrZqr4HvdKuBJWQeDa4bVdzcB23jz1A/c011EhFwXj6tN/LP2bsE7uOgLwY8b6r7vODOpBTexFOCJg8u1xJOzaIuWTnqqpY5tj5ONs59sQ0u2yTg1XuOHzqu16ZFfgfhdkjVG9t/TGHZ/b4bLxJoVGQs5m8d0Pa8gvI3tvn3iU4ZFZyWmyDXQTITDbEX0jkho9cYCxN0XPA/6rmteqh3FFmdFlwcEr7XI9F02QWRvQ63X7Afivp6VX6fbU8RIASGacbPhvBsPkKtxpdp3Ny2vIcaa/1p/tQi+xm/1rNBUzZmW7shbj174Ia5KViqYnLCr6/TwXK+sisV4c4XiRnd6mN2Alag9BgHFRwKlvVcs1Qb/7bhxU6ZVt27u2dbg6NS+NCmVHtfxJg/5ZTACkk5nOOJHOR8KVggcySqm1YeDtqAAAAA","finds":"data:image/webp;base64,UklGRs4BAABXRUJQVlA4IMIBAACwCgCdASpIAEgAPnk8mEkkoyIhJTgJ6JAPCWUAHaZzDR7rjy/4vMvWyrxM2SQ59XcX1Xh8tQE9pE8RzYsmPM0033jHpYb5aHva1GUrf8Xq8mt8tqH7Vc9f0xq83eAAAP78RNclAyfKudCsp5CkTUG6blB/xk9V5j3byD3Xv1+wSQ5pOmKvC1JAkNKsXzx786aVHb1g1lkmOK+R2d5y36Bq94EMJd/ioF++PcNc6M7vPmjtHHCSv/M1rzcutjH3HZC+X6X/9i/V2cC2+3ubt4hTbKyIhwsW162QDJt9F6cPJz5r8x//43r+YLA7YXziYQa7+yyXFFV4/Lbq7EHsf2Ndxc7eYjQ2Q4ltMBxK/qlfH8OCxFd5ac/6nnlChtEOWrkNSworT2XjLm3MHKTQgTqz1Jl+8P6eedc+Zbnd/RPC8b5T4cZo/rmuWwwxr/73r3v8PVHJc9uDHSzsYKlbOSP6Ur2P990Va812KHb2nrhnXwp/NF1neU3tmIOoo4zmFTDFG4Cfxgd7eeUX4EpnPvUjG7VmSnVqzoSf9ptND4FcNSa0aTLh9fN2evq+Fg/3ZoRz9TEYi1izpbWUQoJMAAAAAAA=","cognify":"data:image/webp;base64,UklGRkQCAABXRUJQVlA4IDgCAAAwDQCdASpIAEgAPnk4mEmkoyIhI/VaMJAPCWcA1l6AXmGuBd4/YzKMPb+EGVOwA+jWsDQdvuA+jf+Z8ZX0n/0/cG/Vzq9EC83jY2RVXS8nj8Yx2r4D01wrvjt2hYRfvCor0BTsenO0dkscDUPXg8PGewAA/vjQC/xbFIWr/4uRBSJYACr/VXa98N+K7VJ0o/idMgKx37Sp+5DWcEM9awLtg4Tq9jxo0OhKB3nocfvXXvfbcLJfZGIm9niG4hkhm37zz5c7bN35O9Ucilj3b6sOovFALJGEwhzcm0/zOoF4gfz0zBAheHy/N3Srutc2u3OL90D6pWDYDn4VeYzhGBxL6w/rE8z5KvPp9XwPv6tXTGw9DOWEvqMtmaru44L3Jbq2OvnbNhcaResWjdYw8wp/CUqWlp7PF5/zo8RFSOmEkzGSqzbyFXTktSyz+9MoJhHaHY83InPQ6lOHi3vhvPshHaqGGhx1rb5LC72pqlyGtaXEoxTR5kkNtQXXEwWB/f/5Vtwtfvi2V/7TmRmhUbuVCA2UKxyvcgVi3zJVlmXl4WOPRvZt8sBvMuxRF4AGc3dbjKJ7immGgTqDOguGQmQv2G0xvEXEnhgleSGP/dcPAJAZe7Yonh6ILaAlSMb7KkmnXP3CMkjUhsSxasejY/ZImaH5FsjknoVQTqViB/Mmy6r/BeAVszF0OradCOFvTTekWv1Q5TUqdzCWZN3VxSPGFvBFBwZlWgb5aLb/EmZiDw5ZjIAAAAAA","mainpro":"data:image/webp;base64,UklGRtYDAABXRUJQVlA4IMoDAADQEwCdASpIAEgAPnk0l0akoyIhK5xrAJAPCWwA0PwX+8ccT1MZc9i37Tz7+oDbK+YD9nPSZ/VX3n+gB/XOpS9ADy2vZE/bFyR8PUOCgLqqhpvkGfCsVRcGc/E/Qe0VZ+yCUiQELJrXHFVksOpBm7sxJynDWWHX9/F6D70bFk9JmLL3blCmqlOyAAz+5EusxUw+U88SG9othpye+iCyUjEGfDZdC1LcwAD+/keC/Qsjc72SS4co2oSn+muHCzS2qbM0D/AXV8F8SI09Rd923uSE5r7w6SH3i06RcWUhYa+GsrXeySQt/QStMOHpQouDkgWDr/L1hhUquD1EfiYXbLCZpz42iWN6ZZUUjdyV2eancvmBOsdsE9qAHxlohjWBhl8iOKBnmz//VM8W79Ccf9WSPAn/MEuBflORHYKCEgRwzuhnbbRBr9jvxHRoq6QPIv25RJaHVc/yQhGhOlWr5iQHDE1ks94OdBzK9G/vK1oR4H5/Lu7xak0AqVqkypTj0otFCI5909y5m5uXfN/yvVE+GbvsTzux2Vh65FLr3qUMxHV5/eMIPEdTKQU0gYYfbLJSeaZc1UkvGuQe4J/xsQ0oaEo8JiRpn9CRk7enSSGAwc5aIy0Nu3/o8ppdZKZJ7fhdU8RrAYEtyOYU8CHEoMkKd2zXn/gX/FIFtCcLgSNAlpmd1xS2vlx+tULKu2ySge/BMHTjMaIFrPztrMb5kYdtQ/1LEadPe/usIRfVFVx4694Xfe98EMW0+hTZJvQ+TXukeZX2WzlvutLiVHvU/4Qb3P/2EGBdfuy8xLMdMviCB0Dt9IYH0/a0ee44juauZ1hlkgNQbXOLRZ3VZfhKHI/TrGBU9v8HEa2MnHF3hez/KPLkBs1FSDIaLLhc6SBRjbiGa8wcn8aKfayMp/fQ9fcZh/zl5h9irQ5gAxDT4nyvFp/Cnvd7M53sm5qfHLLg+IniM9/FX5UQ5unOh6wkGedE7ivsmij/aLlyAvkpfNiR6pKvBkNvgxOX/6Q6joA4oXt+y+wnVnD4PDMx266VHNhuoroGqaXKvzyB5h/nH+v52TBs89ImvdYqsKkUnIGq75TAAGB3VP9EKR43kRad0HgFah1uFCS9PtPwwLvE7WDMZqZnPLG0w/P7AZMH+vMSmbSO4qI4vwaEreQSViu0uAKsdJ3wcjy7gO+P8urcDO62ojJTD140V8WBFn+O/7P2t0ec6tZ2J8rGRa3YxXlRLLjafibC+GWnn10+25KyqcDYFi/C8CUWu+apDVQt2+xE+vZCXgsskjiAAAAA","mainpropartner":"data:image/webp;base64,UklGRvoCAABXRUJQVlA4IO4CAADwEQCdASpIAEgAPnk6mUiko6KhKPSZWJAPCWQA0IKzfir7ItWft/4Pw/idL4m3TE8wHm4/5LUKPQa8tL2V/249FWgdsfnw/y7LlZHz5guS7e+ZuOfSEhg9p+cK7c/wKX2CKIvBJUUArs1fIiDL2vJIA/VsCGtet0BrFC78XNWnCcN9w0tmb1zmO0TElaF3qEBH52lNuF2qAAD+8EXf/++BP3Pn9z5ygf/4htnWOt+CgB3Y5yGmC2+aJ3NHQyNqxihBQrGXiEG3uTI4Ebt9i/dYn1XVWR8p4rc3EXLBjUlIVi+Mw8WNSJs/+XrVJkhTj0aSVwWKBCenv5+lzI8Hww5lXaNl6Vt5tU/yw91uA8GmVR1MhMPiI6Rqd/feOlJpHDVwqu5qYcx8//q0GMxvKG0Xh+WEeWiRFkby2WZ+yQ12qkMds5zHKtHERjAciujFf5C6uHOohDIN7O/dJ5/oa5PZ76ySUSG0D0GaEhbwEZmJ/ql/z6Kq6gMN2bBZHGiD4LOPlzOWqwgt1K2n5BiJeaPi5lsMyXJ89LNkXthZZNqlU5tbf3aN1suS3InJB4sfVkQ690kj9xJQbz7DcYDqkcRummYUyYS5/061WI17Ljwrb7ANiNwGO84sCmHZ39X/qjB4Ar3MJvaUAmE+DRqm2pkgT5l2MGbfF+ly1kkX0/DtuYJZrm4CW6/jgZzucS3XW8/8s6dvJt2Uf27ZXOml8AUkzDSAzhoOSZH5Mgya/LCIk26tUZTAGBhrp/S12KhSRduVvxaddzJXM1Fwa+N2K+k9XL+cDwf4KKuZ8NfvNWrmpOCRNYR/iDyjQFzhqb8rL6Wc9nzjGJnH+zAkTXDmB4RWKWJq3BK+toUU6lnMc0/E14RDrtSu6HmYrgUdtN1wtZ7xHE+E3PHX/5yd2zhxlX0uWXs3kfVjx/3DoopwI1v/9MgVkVR9w0WpDglnVMrT5F9Q431+ddQXkQrv6UaFq/W1aTcs+C7JqJjEAAAAAAA=","ifamous":"data:image/webp;base64,UklGRkgIAABXRUJQVlA4WAoAAAAQAAAARwAARwAAQUxQSEEFAAABoHZtmyFJXtIbkVlVWc2aHtu2bdu2bdv2zNq2bdu2dzzNQjLi/VJVGREVERMAckl2g25jFu2/85mbR4ZA6+16icK/v37jkbPrpw1oVUGDDKUV+h3+pLgsljDL/h2VpRMIbvCQc8Y817YS8Wjpn/fOrJ2nE3XaxN+iHiKPvTWpUgAAwHiQoX/mJAq/fXJVgzBRBHqtWy6YRa9OjWiQMvtjkZTcvHT7oHKaDKLpaQCCTV7obFBIm3eZy0BEbn1c36BCJDR9sA9B2pSh/NitVahIwS1lh2UF16BC7n3R0R+p/J3lvi4r+3UViG7JAOqDVnrFRn5Rk1T1qhr0/hscSEOy7ncRsbQCkdM+qgjZT3W0VME5LiJitKkcMtpRhfh1hCSRNoWYHOtBpeibUL2zUEsyTrEk77uGREr4oQzAn2sltShGRHQ/iVCQqo2PZYC9hwJopx1EtB+tS0Fy1sxirox/kgOQ/QkiTzxYhYL00PpSpgpL2wPULEZu3pJFQKG+Is5UOfcSWGtyc1sI1AbXxbgifi0X3vCuLtdAdeBgQhFG2xjXi8YFQTkJ77QUJcZU+2VgCDKQlDticyXWhsoNgpCRJPsWm6twbq3cvFxOlhHQiCogxu0WV+C+ODpe+uNrt63oVSGga5QSGYRQqmm6Hqj4vKfA+3yOiZx5rpv44aHNYztUoWKhSo07D522/uyTn110UCH7c4OFKTlzrUTsWl9fgQ6HnvjhemlZLG5ajss4quTXTtipUnsPBf3U+9t2GcfM5NF7HH/4X20fwXUOipol8jDxrCtg30bT1byEgjy+/TiT57zjCWBJfZJKu8EV4MXTwj0T0nj8ayZirddS1f0H/bN/RwVIwQ/yon8KsYsGSdJecvy5RS11AoFpXFrRFS6C7vIAANAeUe7LfruRBgAk8jeXdblMjH2UA0CMp1z0az5Zg0CycT+T9Z+N4l5HHfSRDvrk1oP5kFof7Ehif3MJ+GkEst9iPri91YD0xndM0u8o0+wXGO5hel4yJ0B8aBssSX9KYbfVv4rp2cU2AQI+ScuoHH7BlYGFt9rpvK+6BcB/8H1XzrUYl8EYpnU/aKaD6NConNJCKem5/WoeBeG8r7gMtP5mCrh1Lp+AOD3vSfG+VVF80CAgs0eJFHzXU/BMBOTmvCjnaVdBySpdjjbbkeHe5ihg0WGaFGhSJIHH9toK0LtcR5MSflDGlcWmCmTv5RAZtKklxn4el1CC7L4CGZD9MRPy3u0RU4PWGkNGcJcn5D7SuEwRFs7SJdDaMS5iH4oUq+J/tCJioD/iiphzyY9MEXqXqxExOjIhEusLN9qq0H3GIEKkYiEXKKsDI+LK0D1uCAE5Y/tjP2pQ/n913BwZEoIq1/yZGwCMN7gyxOt9dSHjFe7rQnUAssPKAP5NEypCVpl+2PMGANS4lAHovZkjApUv+IlPAwAI7mQZgNY9IZHQCZ6OvxJJIo0vZAI3V2kCpL+ZLjGYJEFgoM3VIUsMDfiDggtp2O1hSEnCZx2uDvmvdXR/waU8BXuzHE0FNPcxi6tD/lUt6otELnFEdL9uokF6kv+6ydWhd2e2Lwg/yZA7FxtT8B3eXsbUobVP96WPdbj9aHUQJHrvdxx1vHCMLwj//utyg4gA6NkjfjSZImQlHakf2jY3SEAi0Sv02/dZqc1VoPtlLc0HUAKySTDSeeuTX16N20wWek9lEx+q9dyqY2/+qSQaS1i243oeY4x5nuvYlhmPlv4/gWZMSlrQrM+k5YfvevrNT7/96afvv3jv+QfObJw5pH31IMgGAFZQOCDgAgAAMA8AnQEqSABIAD61Sp5LJyQiobCyfKjgFolsEUBKqB5/oJcK8l+TPEVkO+cvtrfMB5wHov83TqAPQA/Zn02PYa/dL0kn0JsgrbUAHtre6egACaQ4doDO/ciHIQcBcLqwfEormzp5oy7kT9a9VG5DXbO7/Eh/oK4X7W1Yflrta4vgAAD+UWvlUeoBU6/Jg18k424Xu3ntM7Jp8EW5ZsXllyD/3uLqQUWeoc3OYx/8VQ4l9Ju31z8WyFUidnNfBYUBrzeRLoYsRIeE/7qfnWpffOnjDrriL4YAP0zogL13yXmFp9LhGfIdmKucdD85FmZVbv54YrdccOG2mvfGeQ76jhUm0og4X30t+3SJc/3hC/IhrcJF4dTE9eGKOP1CjmBRh9ksecRMHp5jj0KtaGYSjZ2cTt+BD37WlDEgtxVRyIeLIvM1gn3y/J/huak1mzs373e84uoBKk1C//wPFjK+pkjAJuAXcZj7YKh3+WHlidPlEYpUOOfT8KqA+zV3zJ6miZXlAdS8w+BV/gOcCJyZ/ZFZdlvlGzKF8UmyvVEMqSJHmBWRGkBVIg+qo3re5g8lw1dXrgA22SsfFZEI2UALawi/3XKLY9A/8gna5gutf1/hLQCo7f0rRW7ijrX/v2oHSgZHeLMZzV+1bD8KL9YmDy3B1OXxHgNHUN6PIPcJLEOStejpmdG15hNugvqmHS9FSNeQFFTYwj2K9pFDKy/Xmf1jU8Jygyc0y/gn7ruQWpyH/k0MlJJ+ufRdwfD3x65I2RIBOn6ZgkxfWWQf8s1fKAE+TAf/yNTfayvaLEU28//J9LvOoS3j98k0tWZxb+erfR7BECyweULPGFIbNvqnJ7vxCzlQON4o5LHODa8o4/dBDO7Sz/0zgLcz4I9pWAE1ugv1YFV8fiVlpja22BgwhzfAiad4Kzx4zGn2JHGeOJPoLejryl4N4ZlBP1rYgV6ebfxXxzPnzpJenFViAAAAAA==","mwardi":"data:image/webp;base64,UklGRuACAABXRUJQVlA4INQCAABQEACdASpIAEgAPnk4l0eko6IhK5jqAJAPCWQA1IA1+x8h/0FGgcdjN8sB6nud2/02oiegB+wHW+/56v+vD+aDwU0gTPhbUKn9olXbsZzLX9nUkm7o+02eCnQxJPaJJaK7jTEdMErlt89V4ItU9rAVUKlNOHwG+4taHZ3/PUQTP273hhLmCHje9+4AAP78ShKK7X/oramqKwhW7h/vkZFcvvldBGrG3uUdCyBKPj4r/xTsldRcvtJjRmfERoOE5nX+Lm3tssleBLJ0gz5iFjZ3f8FmYYV6l29hOaHz4uoM0wF6xzG0HGjB+wZH+A9LMtMe/6JvaEuNRAgLa7/hAx7VX2ctK+L2+K0utoT9k51pkBuXkPqgnujEkH5W/iCq2MADAZxeC2EE7YnIjOl1dSwXdXH/sG7NFg9RrkyNdiKKyeL92ZBS8vXnZKQL50lMXXIWqdMPG1vnRuP6sMTGP3KeNa4GcaXK4ZanKqOJUlv/7W3lwvByg/siVqZNb31kjayZuDYNHroSnxKWEBKk2hqVtiAXsp8NHR6ohmAxKwM56fjuSgAPn2ItrfvQx0auwUYHNBX8clvaaGjniWEflyoaMHaNIajsKYfuHz4oWVdlY6oZlRUM6bVYTLvR5lcI8XV4XfvFlz9fzxxvTdapoP9W4DK0lERx9P+aNlJjsZFqnJWYDzGEVummX+JAov5LxKaXcbygTQEL4ho4CCeq7JGTs3fGgUgU1MGcRwDBsFkvDMAMCyNaJ7f0O0qVorjmeIMTgOBmpEutn6YEqzFAHBebTIeFd/otyUdBMmw/QCiyO7WXeNZ5MpzQ5oZRP1mZ7M7WU9Z+OMCzzJA5HsWfVbfvJoluqkdtL1OnNA5uhXlDeTwCr8avyXRPDEwWk83CiiW1TcG+RmuM+w0z8VoGLghiBi+nkNLG9u+q9EKg1qRDRbvtl01SLmGmEI9JXxv9bYQAAAAA","realcome":"data:image/webp;base64,UklGRk4EAABXRUJQVlA4IEIEAABQFQCdASpIAEgAPnUulEYkoqIhNbS7AJAOiWoAx2SPBykyugpLr2cZLxQ+md5gPOK9KW8K7yj+4D+VqP9CPYrKnYZ6ddnXeFGPAOw5F37r2djFwGGAtW0vyuXRhk+0/WgGxueV3L2Pj7HleFn1DccxzYVd7cI4G1thHPjW1FlXFlT5VPiFW4oe0S1EUdeSHKHcCqjwAgIpBeZWvUfoZhLSO/dsD/UzGxAUXoRN7nshGN1FsAD+/sImNWDCgWram+UlAf2csMG+UZY2HhmVitbTAquxv3/8YsouK9yujz7my8AkKskz9cPDJXh8PInJLCpvU4tFx6fjFqRR+ZqMd/VzLfZr7Ql+md2SmDY9lXLtjxj93gK9pmaBS9199J9W+KiqF0ys80J3Gc2+wV/FgataLKbRdlV+sSBY7UurnK8xssKoivN/8DozKuBuGbscsYDPy2QYj96O0hlFHbdwkCgxP/0XuUi8FHzEGtgDzdh4F6mwncZuO3qTJwSPbnziWn6SQjjnJN/7jwTkhQVRnhajZi+MJAfVn7nkPlZxtcCE9HPH+vNp/W1qvalM9rQhhvL6AqnMT1pTGN/E10Trlc6jg478/giB/2gAely2CuYebbGHftqxnRzcmZu0bxnpyrcIwcwNv+kQBJBKWS7/2x5m7L9bzRlm+QiMK8Mp2ZSZ/MCJ+BxVyNZ/K3ypUEKt2PwjjcxORfwsII0lBd9rKc6bZy2PPZcgkgvvHrzMxs05+dX0jzYWLa20HHNHshTEWxy2lI1O4P8XfDBDdrhAOxkC4RMwKyImWOqOzNb6ILclzR0BUh5Ec/tLkptqrX30x2Nu654lRvY6vdxTstY/p2mtT8YV1WsafTspsQLRJN9erjLG4Np8+vY/Z+OaITgAkq3Rf9WKxo/ErNB0W68yk1+vICIL8XM4ef5aEn5rfVX1AkjMshFPxY8s5eJj+10n+7/m50HsePoAANuJwVebL7QFn/eWdliBf6qYbrqM8pOKYAzxmwGgrsXb9v10f601y6smVuWOskrkXQIkvTrOCkWv8lLkpO0vduKwR3l7xzUUzgPp9rR7N01KAWb7OV5an5705Jl9SiRgztCVvwzOQe1oJTcaGjHNYOumsL4Q/e/hZ+K2Pq7UaDjyG9F8Pn8pr9CyAWjSaiO26An8CeJ3NU/epC0N+zSP/ydB0OFxQMAaRFo+kMAicy8Zej9+O8HGZepCEaa/XbAeWUzPJLZ6uPK0GGLdoe9JJlJdPZ7MBlyfbd47wFbWyfQeyIQPXk8rBLSeioGV88He5pgZJidXuiHw+R7POM1DHUS8OIJMvAUwnUQwf+60VWeq6jDFU3pmuenXrbcVh1mJvRo4y4oVSglSU20PEbjCn0emRCCYHtnaAADrhI8owLN5/HeDYWbUyDBelgOmyDB8lEe1TCN2k6+HTf7Qs63RiWmX59uwreJQAAAA","afkar":"data:image/webp;base64,UklGRq4CAABXRUJQVlA4IKICAADwDwCdASpIAEgAPnk6mEikoyKhJ7gJsJAPCWYAxjHAOe05nIq84DbAeYD9gOp36AH9A/yvWgegB5aHsyeVGnxUFBBtYSEPfrPhTfCxgRalqM0XLcbN7mE+dWp7/7/wKDwMblf2wPxttEKJw1ihH7NhFJXCW48X8vJO3iwyZa9CDpPROPSSNPlAAP71oP//taH/Vof9Wh5bv/4hzW7ubvR4MfrQxNQpz/3KdtZH+Y5mFOl7E+/GlPkNyTTQ45r8LRKcUwsaReSvdOc+cAKNGvr2cO66opbbqhCluROnMC+uG3z3gaVl+eDwJIRSZHwUTdmt6Y10wP/jZNcHEgDgV0+Vay2gUAz2a8rOE3LHl8Rm38RRm14qGE5WRv2O8ZmfsOlmPrxKGzV8aCnrDA4PQqX8OycVLCWYgM+TVZ7ekPDuqZW8SDbbKAJufu9MoGmKpijaBTMcFGeXuEOJlW6APwWnxsdi3XeeuTm9ZNoiRLG58h0P699v1tjBHCc0/dNlf/KcEDrGXEyeHD5GNncA8SqsKDe4CDKMrHjMO7W68Ks5k1okLKh8XOXdc64DWEFtj3qN8ioVFmNCGCk1Z+/E0GdsCWoBljrLLBLtR+UzepjjU3HiYz8QxUvMcdqbGHzoiqbyAlwUB7negwxyuRZL8FOA1BMiH6HueN3nIajBGPGlNokGmiZEMz24h/uuk48QekEHoHUOlwv9dsD5snswe/sU8aQIc0qD2tVRVOfhQhRGCyvRZ+hvdTPjF34NU2AFle/JnvmqINeD1lcAgZ9BqHHEmZrfslwao8y6vrwnCV/xrDUTUpl9laz6JImaPHoTxWjx+nZawK3FC18rH7pWVMr394l7uXjMjzQ1Z2oMqt69ZK5z8J/rJYhjUxYnbQwFfoAAAA==","insure":"data:image/webp;base64,UklGRmAEAABXRUJQVlA4IFQEAABwFQCdASpIAEgAPnk0kkakoyGhL1lacJAPCWwAxXlBfC8QuartDnAd5X1ofMB+xHq9+lP7APgA/pPUc+gB+qvpueyp+5vpQXdt+bryPCLvBlNfZvMzSBTQ/Hc+PQuEuTr1vfTf1lZDCQ2cWGOreE4Ybdf56o1PZAU6T/NQ5pIud3o4GQYLY5cNv7lycvXAAEQnp9pDQPwcgSlrs2sH2GkLDv7OSX8QzjAqeGOk2QiX+CmbwYAA/vz1Gf1ovxCbJ8R/XfmISUsWLOyczLTnCsoKGQN1l3uYdT8QB1lGjQCBgQCp/4+bPdnMoMRz34I3w3MAEjBiZ7TbPymvPi/6fP/8WCwrxcvu94uEGTBTrSn+r+Bgtk98srgD/LjFJiy1emx8RrZ1uRn2IM0egbe1FbOccDPXFnaPFIKhmsiHXP/6OuHQykL76/e8OfX1YwpwPd6pXIzSh0pN0QKGUOk/FAMRKmECL+qLgEwxHl0VH/Yd7engfi7cKZLsDyOoPxGdCS4ze+z8Se4X98KROipLCJdq3bfbWDYcv9e+ljy9ddr7yvaXgHdTEghncRI8Nv8usXwjiIHunQgmLNTsfo61SzKft6phBZQqgCy3evjErlJCX6INs/edsQh+8oG8P/diBFjUe/8SwOStPLKso88yCC5rIYAxdDM3IrGa+8v0GK9tPMCV+GD96YB4wSy6S5ayPIr/0S3UOhXZVgLRm5hc2f3HhCc8EAMay6vLRI07E6lJGWoB75RaUdLS9C7tGYEn7YVjp7xHpyJBXsSVhO9ckMHz0tlNWoA676rRoAUnFgEt7lQQrI4XCxdH4sEf38vs4P1cPysHUMLcKNy6f0gTPDl66lUjZBQ0DDMCG/5wph5p3TgwEUYN7zfHWAOSU4/Ut5zguEIpUG60tHGnanN4Ws/eX8IpXPLK0ezsNrLztV6IBQHHE98m4Q5vgJDIwEqOL6Ow1J36pst3imu/Rpx64t5SLH/g/9AYa+R1RpXvZtvw/127+D6RL2YY8rBvY6QX/NEbTX0CLvLuGxppA0tqH9nRTnaZB8DNnVUYfVgA/h/KU/ax+iIOd1R1ImtigvkU8pg9ZgMUvphWl/rTl/3AbIZRrk+zc6Kbs58z8vo3clztpQTVu+0DZYFnSL3rEDdIdvP5uFjgVb85T2eF5P4xlbOc5J/KtRDxwJxsjgSGpdhfFz7dTKAn/y8k5vfww5ev5NVsL8r4ri0jA3cLxOci8wtW2bA1SnBWLnmISWlw7iOYgzRduuUJNYZvXbj9cZzbQa8dQurjo1wBZGX5/aegpRunugB+2yUuS4x9XjB2c/lIdSdWKT4R5uZEdlFIbXNZR3S7N7roCoBYIJOjlzcizfv3GA4sZYutHelJYUzT0GH4TWl+YDZfxTurd+PsRWvYLMnoQnYqx8LUlcsRvImlBAOR9qNI2K7kBBxkmlG45MgG8L1So1n+Li+KIa6QZow8KYn1oAAA","gotaxi":"data:image/webp;base64,UklGRuwCAABXRUJQVlA4IOACAACQEQCdASpIAEgAPnkylkikoqIhJnM9MJAPCWoAyNEANgk8hyrvVMZl2iMR+dd435gPP09JG86b0e+zjDC08M7VA9zD5xjz+AzRAx/HNmgWy5uocT7Zj4huDtRPUb0nuuD9BNC6BVMD93Em6svJUfTY5a3H36hyQDMJy8km40c9xjD55Es7AfjrF4XVWfDZuM9BWTFRgAD+/zJEDvaQl3ML882gVcxuOEH2Je/gevhaGGRNPPz/PiSrPVIODG9vtHOXV7oRWxC+COIp/mZ3xd987RpTpkjBHAm/SY/J1tf9ogh9A/Tol+Gvj2lgY4dRB56c3lU9UTHjRC8ManF4Z/O8rDbliDONo9LQTtt/ODIpQHCFhHqvzJp7KWrEvNDL5wWVFRUpw+lMOo12f/SFqirLX5S3ZuvYhV9o3BlqK/H2uRLjQQ52dE+WO1zozuxbN1tJaUS0ygMfjkYxMUutjl0T261qT8HaX1oqpFfylW+NpUQAQZjWcsvbFfADRDRNDkws5MatrefObpHmUI58LDmV5uSh/AUEqI+1P+e2X2GsYUa6k5YJ12y/Xd5XZqbmLtc6GXkBIWoSqIByEhaTbdAHexkVON7YGMCGmYK2r1eP83Y6ijGESSA66O/XLVyTCEkXFAtu/qCcCuu4/554mhJ620xlQSpC67lpzzGd1SKPtiSLYIcJ8507wXUJI8cOnKP+os6iNqW5Wzg2uCtnlcjMpuXLJBDeSd8YjaoiuFaiTxd5SXRCmbUjCRmER6zGiqz/9R1EI5isgeGdxprYK4NlZH5zjgeGfFLYDbvZw3V3aOyoQO9ChcE/pwRp28nFy5p7qtGW5+oB+vw+R/CLKMwJnTN2VoOQ2fLN8EWgTBzAgA1xWnWRhyneBNvwtQ5nimqRD5xx7jl04j276/3nsNf06WZlR1v3ModD3PZ6IYU0OoG9x82raupTArOFpZGqYjMCColT0HKWhro/ngAAAAAA","gotalabat":"data:image/webp;base64,UklGRvwBAABXRUJQVlA4IPABAABQDACdASpIAEgAPnk4mEikoyIhJTgLCJAPCUAPLQU68DgAbdHxgPWZ0zP0APLL9nF9HmAdgNbXwqUkglD0xNHtMJsuZz2xm2tmofmT+s0loqKlT1zBsedIE+jKIB/PUCrXwQhWZPHLHo7VAAD++/YOOByCbSQN/zlOR7X190R3nD0Jtn4lq3/zAJmJdShOryCw5BwuYG4TZTaWLc5aY9xWJOCHHXU7W9VF+HFK/roBJSbaRG+aRuV21xxtqQOjavWNWcYYnT4urdzteLz/akS0/56INL1tZ0qloCXat/USOtUaSj65EB5iB3ytlXkmYpB+SkGZEM7fh0LfWfzjROUzqxWKZpufj/a0fj/lEW7xyNEK/t90fN46raVrboBBZxexpWqNWd3dBpm9D13ZvKccTGnXXR2s0t6kM51nu4vp8DsEzvs5KjqBdDPfYcfGRCOGKha2MHVcLxpBG7ioBzfg86JSft+o0BzylzRACRevVFsfYlL6H+J394heItjBnIRbrMAf1jdpQAiKIlY+djvO53z+FXUWhKrx7rtTvxW7jcwLWEsuF6qxcT8e5nkbwRbZxk71zEstmoxnFV2gCUnbQjNjAekEZ66lfptO1HPpLUuijHY22iX1NLz0rM9bBof30WtrRt9xisAblk3gAAAA","maojod":"data:image/webp;base64,UklGRpQFAABXRUJQVlA4WAoAAAAQAAAARwAARwAAQUxQSGEAAAABN6AgbQPGv+l2x0REpAewCQAwyfT3ADTwn4sC6x8Gh7k8Ef1X5LZtw6S7N/9imyyU0cBC9bSVWu1hdqb449Cl5OQCbeiCuIaXqC1MDLC7j3+Pdd/ZyS4TYBv6MrVMFsoAAFZQOCAMBQAAkBgAnQEqSABIAD55MJVGpKKkoSpb/aCQDwlsEuACpqWE+Afhn1P3HON/jH+WHVAb2eHcoL6FtDPoa8wDnLeYD9YOon+tPrM+jT/nfZA/nPqH/s76bP7b/Bx+8HpCf/+8tvvleh/pOF+V2rnf4Dov/xXj0zG/67/t/Uzz4KhTFQCzQkgkZCzHryqIfnpLJ48FXaAYgVkoIrlIn6KJunTwdkP1ZaBT9KWe0W286FlsXx/LSocTHkdg1fCcHYWCONfAWpA7i5cBZsSlLFxqcAD+5u5aI3JMc+l06+2PNNfLvvmkCFRj3Iy+DDX19dvg27SDZGmr+qSMcYQKU9CEhMQ0jVfwcF0kN2pDNbSLbq2uxOcz0D2kbBngJER71DqHhlJssWIyD23/haro7NC/PSLT7O27cFb/vL2FiTDS9Mtxzn5drkjI5t7F+ICNa8EGlnpjTXa/Ghf3JohB1drXFd65CtzyxOyDb7feZEAGZJLXJuHd4HBV+pQ/w7MnTnmldvExvnQyqib94XPWGtKBhdiFivdc/Ds7KSZlVkG3pI/ifexSLt8TduPN1IzUfzZe73T4ScSHkvia7KgufLezKsFZlkeupjD0Tvze68F3QMNFvDoPKIoMQJ+RbYZTdPYFX/DxnQbhttp64ManBt0Q+N7+gphj8033u6tigJKQfoRu7jOG/R0356inn91j7bZWfs+XcZiZ8NrjbxkmSU9Xw+F/4BRcw3/fC/8ApUfqYjZ0Pbb741J9uwLkFPZRdjMQF+Vvyb3MrNg28CSLxMXH3HnJ3YBAqfkgwxPq5Tnsk3DuHsxsq5Vv6hWs3kg3+KcjB+bFHNRegZICaRy5tOhPZr1FRtc2Sv7C2Ih9gVuEfOiizxnEkjTOH2YeCDp/nhohGF5Cp63QnMKTxxWymOyBOPU8veuBcWGSrMHVQBMpiV9gEPHS6NaNLXNGcC/5+DG+9meavzvg5IoEVcehdJ3krIuHPWOK+CnwK0OVImMkP6oq7F6k/2y/gN2NIla/ZW2gbVLGpWMt4F4kH6N3fSouuziUgKYK5nHfD36XRadl3vlOGT1KhBzGhwdXrt8SjF8DiefzG1il33Uo4LdN/jGCYgkkY+e7QIyizYa7EErvtuUayuTFNwHhdZNWxa9/upZW4/henwbodcGY8hKgcFpDtQ6NxXePFokyUcB7WIt/d/z4I3SwFxfHACYJl63MPCGX6FpaA+2QwIZfb4jqlhuLY+ToAClxxWKia0TwwX7kXPQXX/52yW747HISEyFg4MOLYZvf1zj+U6rT3xS7ZIclgDwlDF8YVyIbY69F8Lj5EuYSmSVXiWoJax6DEW0lF0RZTa8gS8xAfOmah8uqTqqpJD3tIUcHylYZ8CRpOnBg+ZdXpxH5DBD4hWnDYs8ByEr4luvyrgldfTlm1jali7r+5CRFL719oeFhhvv8k8zydyMONP3M+XBcaAEuUw+fZPX7FJYqRjZMzy3RHcHXn/GIg3OxABZTVS74jy81Rr8m+UyhX350k0bobZB15S2g38L6ldl/x1LC9epxHBZGTo7evJai1Ef3KrIGVUNHjwcXmawg95Fwa6xJ68Nd7YjmPZUHsvmnmdp4W9d6bpnmb1xaCR92ZZ4u30SCllyZrBhkdtGtJeboyaSWvf5e4Vl7d7x2QI8cu3WAsXoUoAGI1A85phDw9MFWnSYNXFfHNbcPDQuPN5xHJQuxt9rASsXiIAA=","altamayuz":"data:image/webp;base64,UklGRowCAABXRUJQVlA4IIACAADQDACdASpIAEgAPnk8l0iko6IhI/qsAJAPCWUA04GCSS7aPnw/RbvKu9FPtcwrtqjSleo0LyYt/0d4/SmisZr4bguUd8f1z2zuabE4NqvgtNhFHcqzR2a5APwTBxtfhtdRo14IG8SzItcT1RSJzEAA/vxKBY2gMYevRjl/HjcF2fycx38+cPlPwV5aNkVsfwwe6huvnzs/6nPJqZ596E4dPN9e2rr5ZE5o7ZxvaSixy0HgUwjna2DWDHYXB/39LrI3zDGhVKc0x39OfHEz3kgM14BWTHN3ao5Vj2bvcxZvGrJp5Cc1corXf64B6MoEBP4NRADwyYKw5vlDAmZ/z7ufPZf7gOOVOaEM8LrNN52g8Xv0rGPYtJgaV2IqCp1JrgDmCawJPKCZx7ryTplnrxPnAnCrdg8IlZdKA/99LxMO94iWV3DPlva4EAZkA6SbUEL7+u1JQn2zdQs2iKMWrVuJ07otZAdoi89kBohTMDXR4RXEFuyU8RLam9Qu/a7RczGDICgztvPYcDYB4hiBDvFbjh/g2NiPe/PsZ2W9Yp6z1sm+Zdul6xo1b0LMxfncM+usXT3+MSS3zh+IlIyU8njOrIfi5ChecX+t2lhV6otXSmFvNG/9dggEtV7PKJerRHToNdfjUyeWgnwmsh5d+RbxPSKogINJQz4jQzEfFloxvHO/3RH6lV+xt8LYHUsicKLFsBPIgFG2CtWGPuRR/+JcY2/QzpT3MaQbs3YUv23iDB7LrG5+bF7i8CybDtEywASb6NvZoBIGL0EQ3PXCtWkQZgcJ4OzkRvHRWogQzSQeWIsCTiDylezqL33wk0Ahn4hM4t06NstZJPTnKwiJhAAA","alyassirah":"data:image/webp;base64,UklGRjgEAABXRUJQVlA4ICwEAAAQEwCdASpIAEgAPnkylEckoqIhLNZsyJAPCWYAycIBXV6BfjOLt61M6ezqcBtnfMB51Xo1/yO+c+gB0uOAO9h+NLGBW+yxdJezPvA0iPnHv/aHv6M8RySa2shtPHnxN4qPOD5uwQL48YQaW0EuHp9Q4MzakKMup61Shd1b8Fw/AMIbmnOlT5w0FuWizKwFbd7slQvs0tg1g2Jn67mwohE7YAD++G4z/mnv/l43/l438099km2U9XKR8xibhqa4yj3yKSlcE0yaZHzign03+xyreG+6/qQ66OGI8Bwv3tlq/IVp0AupkdzVJYVMeTDNHXrK5Vl1OLvOQRsJg/MxLkF8935MXRMi9kOOa6Dl42+26C+46SciRm8nre7nB4wooigq/01muWrVI+EdrGEGKJuvEM4XMPO6fcYiZBzKSV6FafOjwo6qMw6UaUGV+85FNI1xk0ZLBHHBnn3ghTytri1YKae2h+0/aofGmNeU6668xX2aw/p6WVLOMppSyB8fbkOQGZLSIT4tJJ3QvjL7i3PJxmK4s/G9JCWyW7N51oY4pcqta2reDPaFstb1Jat9TGLwRK58Xo+uZazmWs8OO34yOlsbs+UxgZUlMqZWti70G5NcERa8ivKJf5YOccYQN7P2Qv2rRqNaSy53F4C/ilnzpCzAUNO71wKpzZay0/60Oao5vEhT3jOSlNTbpWr94WCpE5PchFVSnBQRq1ra5o+DxIxBrXL6PqjA3WsfBwWsP7uwZI6QsL+PBvLep9fYU4pbo1EJZFosvHvqHSMO5qBqhOG25biJz3m3owAEma6dI+I72N0DUuWXtZ4AyiDineqBQW6uumUjMkmufUmCu92I5x1PPK8S6w3wc5MRPZMK5EL4vEPMUj5BPnxSCUqJCF3YsFeThyPc6sk3Nyc1I1W4LCSTvE5iO8Lk1pTsAmzfTUClAi98V5ufRb174QrcwTCUBwL8/2lfe8ABAEWVy/3Ov9fto10qbgGN5lOrTpdbesiBnHcdTWX3ekbqTgWBFSjousunwY3irAu00J5QC5brv3Ar/LPpzmTol/ka7tMZVo7SVVSHAYxduapO6QZnjlFSDIK32Mf2e+T4F5jK0DoAaxI2hfWFWOkyO1e9dUVWwIm5syviXWKjaNkXd8xSIPtS6bbzySQGCduq481KHOFkJ2aEaglCdpsuFE6Pogk6Chp706t4046NQKneXwsOFSCtzsmfPDMCtWwbyOpjDMvpXkQfMvQLjjSXQf0ahXxdF9TpA0CfuYQeB8XbhU+TwcONjW8UrTXhi79m2BHQp8LXfs294h5DtDuI8Xcg61j87IBi6QRr/KIogfm6B6AtdIiNBsrAiKOPpocCxz9s+D5KOTcBeOr3WLOmAzpYM4jq38OYlV9QlFkgLqoGqlSQIAHEORYEN7fLhgAAAAA=","gedawy":"data:image/webp;base64,UklGRmwDAABXRUJQVlA4IGADAAAQEQCdASpIAEgAPp1Mn0slpKKhpnmaALATiWQAVhpwG8A8SD1mej/6k3eNf8t+QHtVRPfrdSA7Agzi8p88+8GjJ/4H9E9c3NU9AewL+sf62do30XP2wYPLY2txRMO44fY6TZ1oWU+N9lKsVcIkDbLzYbXPNK9kfrdavYBwCzT2XfWEiwIFBtgUif9XUfV7x3GQAP78Sgnn7jchGjNdOw98nCSPEbOBtd2fheEy9Gj7jYz/I49erj3vWp0Tm/kyautf9o7FgBuhA43t9VWGpbLh2YJDlk61SUbvr00iPJRxp5pzq/FtHVd+kCwDD4+HrSDZlzgCfqsHD4Nf9ixIOeWp+RmH+snS987BRFa/maeViozhgYmwcL/858cuwri14/RXaMRaCwcOxzOUjPihPmTkDlvtwx3THGHsNmd1hngi+d+y7Vkb/W+aIdyXS1Kct7SaH5seDGpFu4H88eibwrx1jSzhyIPR1JJ7i8onD/f/MM0Zr3J6G2smgAnyM1OHP0iVIJysrp8cO/P6cAJAoS5zfOMTAtiATaSk/xjS/J2GX1njcbZ3gYpd5AL0B19gWHZmperRwPMLW/YcLdsSldFTiHrHc7P6DsONLBeGsFR3H3AlNrRsUz7+/1RamYYoHw6LBlN46egmdtXZV1bBKGWbt1lf8ssb790vDqgtzyt9fTgpJ8CRerM9RtTdXRQt1uneFkCwknDvLgMW9dlrKJe51mrYvsYaJRKOkBnFYUTdcWLGSlTIOK7UvJKNnyq34Av7TCfkqC/HEMl04yMRK314uZU8vOEvLf/931a88aH/2c3LHnnMmPF1XXZ24iGR5OjlUiTg871oQKeHF4UdSULFyfXvNBEeNAbP2EtEp6jMFcaJB1MiKsjVspW7yLaOGJAl4YmbUwSMtsYZ6e2Onfon9W86jkstLuIcQsLTjiPymkTiPI9v8CFTBtTLJjFiUSC5EqgG5ubNfM1r2RTYI7O4L6U+fMfGfz+vbZaEK2rMPRO/rZ9Max7n7IsAuai0fAznZkF+0Dw03jFU1l3BmVu8Ud689t+bpJ8L0515xcCdf+Vtch1wyGYCAyTjCrLe6YrodUN2t74mYdy4dRCEZ6FaFyBWQAqdejTR60CpVyKm5/xm/JMSVUhBnikTkKAAAAA=","raqib":"data:image/webp;base64,UklGRj4DAABXRUJQVlA4IDIDAACwEQCdASpIAEgAPm0wlEYkIyIhL1gIoIANiWkA03tVbaZ3QB0vJ9b+S4f5TX4rzA4sv8z4iHzX+3/SB8Sf8f9xnyN54XqzgRnSKJMeWpzJdeYBGOcsldiTPuxO4Tt8W0mDyvRvy/KROWRbBeZaXNfiz+Wc/IYw4P01fYupT1Icg3Ya54VCKzk1LsfHH1twEULB01XVR4AA/v7sCHu7anjgn72NLGYOUqAZVOHYHLeULLg5o3Pv9UB+Fxoh5ulqOFSfHtpcG5hFgvk4JRp/iruUX8jq0MlB8/+YSb+9COyv/4ZQLGRk4XYD3uuq5Z/fOslg7vk1B0ycd2dLCf5n22OPdX8iOkiPuEamdNle2hRFLYNWm9e2bzvf0xpH7RR306WqFUlCbcUxXxeCsWtcjkG7ON/1T/b1cOg9N8oITHkzZQf68G79xtS8aCKDu7rLhLqHWJgqkbLFj0YmcwUL72/v+IVUnKt/5YDPetrQQ+Wa+wzLraxroeoJoAPZTLmhRa2ADiUTX71viXYFv1LpjqYNyaUmysRjI4D5/dkRz6iR7SkrdzgVTVKNjUaTKT6rr+i871TXK5aoRKZ24DNAlqLp/dqsQIQefSAZCbRLbY51u1upZk/MD26EKR2AGZK63V8LZG6px1XSdEkCQH2zshxOk6JHOFvhUGDrN8tmZ+g/tvTbeGK9PA3vYxi9o4rsfhQgHy9tIvefToWVoLxAQCswCkIBwthXVKmPvbhSNFIvCV+Gf+Cxyl/lBmGf7oTqm/ModOAHDnEOwFCEOM/eQ1LhSQs8ET3SBqlfry/bOYjqTe5j5BMff2iP/kM2TLtambG5qF8HkW2krKAlH8KbNCdd+OAUOfice2bbJDZyxMyiIC+XjJQk41Q7Go3aEuh8kxhl/vQ/EyTP69hk3XeV/OZaruSeB28eXlOfR0HvaO7K5k5kgniolndkwuLvAksuAw7ZO92dXuZAxyC7U3ndNZ9o2vuNfyPnY/Esn60yn8Wp/BmOKktzdTqtKPFsDr/BiB4ZsSCRhUx0WiVqGolznEoC5C0uf2OuptJ8q4tZ31v9k32IB2JhTHKTseTrTm3RiuAAAA==","aldreesws":"data:image/webp;base64,UklGRiIDAABXRUJQVlA4IBYDAADQDwCdASpIAEgAPnk2lkgkoqIhJ7VcMJAPCWQA1XBgfAcTT9zxOMttj/MB+u363e8Z/iPUpvF/6gewB0q3+GoDvLz6WcufE1qpmheQZ8udCFb1NzxC2GyatrfTTFE/pIG7+8NslIBRpwHPtlxxwq9Mt+5sJ5DkV/bTepPyX8gb/BNg03WzRAAA/vxKAIbTMxhCtCgvFX+63NBXG+FdhOjCaVoCn0g87FYlY45xT/rBAhe7kvrbApItdBwjwCyyIZd+8z80Jj4H0t18QNFXKNfnZt7mw0Rtt6CaHXpuzPG+TJsnVVAYrah18pMdegpXfgCE0a7qJTYiHay/b8KH+4h91XkOqcTqCz4nzdq+Ep5dlE6+97xfC1bQaL2YZ9i/+l1WJ4/HgmYv/K1CRuId9KKPQ3iWZDgiMB6mq/oplYGlVmOy1LanixIxrHGrvIYx7s645l0dBTSvV0E+vJO9nzOEuKs0Y/R38NtO5Ks+j95G7fZFMwL3DuLpx9151jdWbLP9Sff+TuZR1/M/MuJVWBCyv6x921Mx6CeFaWogn7DtEX71oS8d+qiqnvi266Mz8sQe+FF9QP1c1TT2NSF//aNu/Eo/+zOBAsHpHyL616pVpmbJcbwuSqT9FjDU45PUcLxGYVlRLSfjf5aOCZS08a+2WOQDfpJROB1CLol3DkxJ/rwCZJJ6lUXCaPkHGyK1F89U+6+7PCQZR2YhkSlLKEBNzlPs3XkS3VtKri8XjQJd6/0Y/bboJ2xMbmO/ePeqO7PZH6leKH/OU2uWFCETF6r6kbLfYQ7RZyGb7Ts2VSMWw+CpbaiXeLUS/3q1p80Pj5K5u64579Hio0n+ry/7bxwGTAewvZdE79icBVLagIGKd7/56FpEV3LfGBqzbLb1SNX3vzwRrjx6N2mL9rXXIjHs2OGJ9rxixZoXJFbeM29GoduW58kmYsbMFPyY0U/h9AqE7i4C/uYFwnRJe8iN5UybOlyM+13P+BqncapVVwLg60vQ7TmzZB6tIKgqDvvrcixwF3w6UNB07efWn470s4W15YvAAAAA","waie":"data:image/webp;base64,UklGRjYFAABXRUJQVlA4ICoFAACQGQCdASpIAEgAPnk0lkckoyIhLNTbMJAPCWYAz1hCK7+6cOWWWxB6j/yRvXvMf52f9y9U3+93yD0QOlfn4+2JLFOF2iR4aC47y9Rj+9eiRoG+qvYM6RHox/sAPmyHp3fCiyOSp8atU0nxzXVzl5Gt9q9/UrgUWSpub/z13o0Y8Qe0D1yDTKmvEXlfJhdquBCGvXefbA40qnMr5fLKYxQ72mDsfWpgOCKkctmieWW7LjGLmjX39lKByf7nLnsq9HCfusyWIJb5NvVyWZ/CEMlQidXrJAAA/v56dWIrHln3v4yj4XwBPShGBnK/u/IbrmxoEmTOe+1NIDr/+xcIsDD66hOMwIxZt/M4uinOSvce6P3cGq+fUb2e2s7PYSP0/uRdwUF3vUIAdlMGku7SBFX3Zye8Ht6YeZeH6/PZWlI1Zez4ksXvyiVcddH8J1sBTPx4q3VBAtDfsFFhtcCpyAdmn9l+zWXX4O77UlbtvAegn1su6EOdhUgLgu6y7wlkS/KO6La4sfcFlOL5fXp92jhp8nOEUaA/nW9+zoBKhl42muH++lrebtMdpU51FRpfXyEc9YJL5iE+J2TA0v/drF/tKYgNWiQuGPUEOXlkkTgtGZ4ySpa62t9XG1QQ44F7qQ0am5QM9yGc1NRxKzdFE2ptXRM3R387WH/eKjq9tcKwCHFL/0oyNl+SHo4nUrQX6gMkrBRy1kH0fBC9+Kjv2e3WbAaip4pL+DOmQTN9BwgwwPAWhNxzscXFn/J4H53u7lN2fU1xyjXdNqwPt2OsQ48NU1F9mg0mwDDsQPwHDAy9dms/KTErLE//aZhc2nbCcuHW2wf4NBhD/x0RTBr2/lToUpXJdr9ibhlUL/GJeJAX/7GYO9IPNIaQ+7h8Jyxv6rwtwAcKERltCAlIxAAYSVHY5e/2bzgDoejNikr4BWND+F2oQuxhqL4NgLtr/g9Vg20BWcXoj8GMk61DuIHaRKWXPLp+HZ1n4nGvz6erOPK6ADSNfH4+xqNRrG1uaf+aX5CEOInWTiPouQ9thoTq4119XcSSe6j1Fw7wwksfv/IAg3FlHBLI4u1etIEb99zwHmB8ZZyCndrscBITCoUAq1k46KkHlygK6WfP2fZlJRubKN8txcfXSLHLN+S+uuLSc1WsqQHslIrXsFtHylPpfP/D16oyiZk/p0/qv1/vaj3cryUNz67lxrufJ2rOpvlpn8J9Ny4BXgFSd8Xo0euDjIukj9TG/H/szi7rCPNUdklHih9IzAGxyfiMxXbEiLIQaE9TnKiA+SMWeyppaC/+Piavm2hG1sOUNHtkSSHI3+Z9lFCbuunFxho2HtgUwJK4Or69YFq8jPsgg3LhSp9sK3vr0Ig69mi0Sb7bcwzRPsVLEUykWXdlpRqyg+vSaS+bwx+lKHTdcDqtfVoUkpeJfZW78xg/g7llsAb1KK4osrjy289e9oMzKxmUszwczQaB86bjx94TWAdABVerCOOQt98tVAvGAfMQwkyN+OuExrnuchsNJjwudv67jUvmTvz/IAPyETXcSdNZigAH2VKb9M3f+OfUP3/LV8PxQHaUnOkuwsi/z7+Za+1m7ILgD77uQGYyDnSrOZzS7wae24NuthmZD3C5w7vUWtVGSwv6VACZJULUMuA3QB8QUbMBtVlWcihQgaZu8VUcHu0I5LgoVlmtBuxyejqqJP875Kw7n6cxVTpULakNRnvCrW2Mp/lSjVETKUWjkcXmmx7AD7ekItqqdloVmAr0AAAAAA=="};
+const IOS = "App Store", AND = "Google Play";
+const P = [
+  {id:"aldreesws", n:"Aldrees Workspace", m:"AW", h:200, cat:"gov", meta:"Aldrees · 2026",
+   d:"Attendance app for Aldrees employees. Staff check in and out from their own phone, confirmed by face verification with liveness checks and by location. Includes random on-site attendance checks through notifications, punch times taken from a trusted network clock, and Arabic, English, Hindi and Urdu with full right-to-left support.",
+   t:["Face liveness","Geolocation","4 languages · RTL"], l:[[IOS,"https://apps.apple.com/sa/app/aldrees-workspace/id6807011902"],[AND,"https://play.google.com/store/apps/details?id=com.aldrees.erp"]]},
+  {id:"waie", n:"Aldrees", m:"Al", h:200, cat:"market", meta:"Aldrees · 2026",
+   d:"Customer app for Aldrees, one of Saudi Arabia's largest fuel-station and transport companies. Customers manage their account, pay (including Alinma Bank), follow promotions and pull reports such as monthly truck reports, from a redesigned, personalized dashboard. Rated 4.6 on the App Store from about 31,000 ratings.",
+   t:["Payments","Fleet reports","31k ratings"], l:[[IOS,"https://apps.apple.com/sa/app/%D8%A7%D9%84%D8%AF%D8%B1%D9%8A%D8%B3-aldrees/id6738043230"],[AND,"https://play.google.com/store/apps/details?id=com.waie.aldrees.mobile"]]},
+  {id:"daftra", n:"Daftra", m:"D", h:205, cat:"gov", meta:"Daftra · 06/2026 – 09/2026",
+   d:"Mobile app for Daftra, a cloud ERP used by businesses across the Middle East. Invoicing, sales, accounting, inventory, HR, operations and reports in one app, synced with the web platform.",
+   t:["Cloud ERP","Accounting","Inventory & HR"], l:[[IOS,"https://apps.apple.com/us/app/id1347814396"],[AND,"https://play.google.com/store/apps/details?id=com.daftra.app"]]},
+  {id:"hawi", n:"HAWI", m:"HA", h:158, cat:"gov", meta:"Elm · 06/2025 – 06/2026",
+   d:"National platform for Saudi Arabia's hobby-club sector, built for the Quality of Life Program under Vision 2030. Members discover and join clubs, found new ones, book spaces, run events and courses, and manage club finances. Serves hundreds of clubs across the Kingdom.",
+   t:["Government","Vision 2030","Events & booking"], l:[[IOS,"https://apps.apple.com/sa/app/hawi-saudi-arabia/id1594176538"],[AND,"https://play.google.com/store/apps/details?id=com.hawi.qol"]]},
+  {id:"ntg", n:"NTG apps", m:"N", h:212, cat:"gov", meta:"NTG Clarity · 05/2024 – 06/2025",
+   d:"Low-code platform for assembling business applications without writing code: form builder, workflow and rules engine, SLA tracking and integrations, with ready templates for HR, CRM and asset management. Ships to web, iOS and Android.",
+   t:["Low-code","Workflow engine","Web + mobile"], l:[[IOS,"https://apps.apple.com/ca/app/ntg-apps/id1533118395"],[AND,"https://play.google.com/store/apps/details?id=com.ntg.smart2go"]]},
+  {id:"incentify", n:"Incentify", m:"In", h:268, cat:"gov", meta:"Workforce platform",
+   d:"Workforce motivation platform for retail, hospitality and distributed teams. Managers assign tasks by role, site or shift and follow progress live; staff earn points on custom KPIs and redeem rewards. Includes shift scheduling with swaps, role-based views, analytics, a live operations map and an AI agent that builds schedules.",
+   t:["Real-time","Role-based access","AI scheduling"], l:[[IOS,"https://apps.apple.com/us/app/incentify/id6483004442"],[AND,"https://play.google.com/store/apps/details?id=com.gt.incentify"]]},
+  {id:"ilibrary", n:"iLibrary", m:"iL", h:28, cat:"consumer", meta:"01/2024 – 05/2024",
+   d:"Subscription reading platform with 70,000+ eBooks. AI explains dense passages, translates lines inline and defines words with examples saved to a personal vocabulary list. Custom typography and themes, highlights, notes, resume-reading and recommendations.",
+   t:["AI features","eBook reader","Subscriptions"], l:[[IOS,"https://apps.apple.com/us/app/i-library/id6745789147"],[AND,"https://play.google.com/store/apps/details?id=com.elibrary.app"]]},
+  {id:"finds", n:"Finds", m:"F", h:330, cat:"consumer", meta:"01/2024 – 05/2024",
+   d:"Local discovery app for restaurants, cafes, events and experiences in a city. Personalized recommendations, community ratings and reviews, exclusive deals, and social features for sharing plans and meeting people with the same interests.",
+   t:["Social","Recommendations","Maps"], l:[[IOS,"https://apps.apple.com/us/app/findsapp/id6502782942"]]},
+  {id:"cognify", n:"Cognify", m:"Co", h:280, cat:"consumer", meta:"Brain-training games",
+   d:"Eleven brain-training games in one app (Wordle, Hangman, trivia, memory, Speed Match, riddles and more) across Practice, Time Bomb and Survival modes. Leaderboards, real-time rooms with friends, daily challenges and coins, offline play, and a colorblind mode.",
+   t:["Games","Real-time multiplayer","Offline"], l:[[AND,"https://play.google.com/store/apps/details?id=com.gt.cognify"]]},
+  {id:"raqib", n:"RAQIB", m:"R", h:190, cat:"gov", meta:"05/2023 – 01/2024",
+   d:"Enterprise accounting system covering the full financial cycle: chart of accounts, journal and transaction records, invoicing and financial reporting.",
+   t:["Accounting","Reporting"], l:[]},
+  {id:"mele", n:"Mele ERP", m:"M", h:228, cat:"gov", meta:"Mele SBS · 03/2022 – 04/2024",
+   d:"ERP suite unifying inventory, sales, purchasing, accounting and customer management, connecting stock movements to orders, invoices and ledgers.",
+   t:["ERP","Inventory","Accounting"], l:[]},
+  {id:"mainpro", n:"Main Pro", m:"MP", h:14, cat:"market", meta:"Maintenance marketplace",
+   d:"Marketplace for car, home and electronics maintenance. Customers describe the problem, compare nearby providers and book in one place.",
+   t:["Marketplace","Booking","Saudi Arabia"], l:[[IOS,"https://apps.apple.com/us/app/main-pro-%D9%85%D8%A7%D9%8A%D9%86-%D8%A8%D8%B1%D9%88/id1582292480"],[AND,"https://play.google.com/store/apps/details?id=com.Musllaha"]]},
+  {id:"mainpropartner", n:"Main Pro Partner", m:"MP", h:36, cat:"market", meta:"Provider app",
+   d:"Provider side of Main Pro. Mechanics, plumbers, painters and tire and battery shops across Saudi Arabia receive job requests, send quotes and manage their workload.",
+   t:["Two-sided marketplace","Quotes"], l:[[IOS,"https://apps.apple.com/us/app/main-pro-partner-%D8%B4%D8%B1%D9%8A%D9%83-%D9%85%D8%A7%D9%8A%D9%86-%D8%A8%D8%B1%D9%88/id1576702076"],[AND,"https://play.google.com/store/apps/details?id=com.musllah.musullahservice"]]},
+  {id:"ifamous", n:"I Famous", m:"iF", h:310, cat:"consumer", meta:"Fans & celebrities",
+   d:"Connects fans with public figures. Celebrities list their services, take bookings and stay in touch with their following inside the app.",
+   t:["Social","Bookings"], l:[[IOS,"https://apps.apple.com/us/app/ifamous/id1644139054"],[AND,"https://play.google.com/store/apps/details?id=com.Badia.Mr.Mashhur"]]},
+  {id:"mwardi", n:"Mwardi", m:"Mw", h:170, cat:"gov", meta:"HR & attendance",
+   d:"HR and attendance system for employees and managers: clock in and out, leave and permission requests, photo reports from the field, and meetings.",
+   t:["HR","Attendance"], l:[[IOS,"https://apps.apple.com/eg/app/mwardi/id6444159801"],[AND,"https://play.google.com/store/apps/details?id=com.mwardi.app"]]},
+  {id:"realcome", n:"Real Come", m:"RC", h:140, cat:"gov", meta:"Field attendance",
+   d:"Attendance app for field teams with photo-verified check-ins, leave requests, business card scanning and per-employee reports for managers.",
+   t:["Attendance","Camera & OCR"], l:[[IOS,"https://apps.apple.com/eg/app/real-come/id1599098078"],[AND,"https://play.google.com/store/apps/details?id=com.arabbadia.attendance_app"]]},
+  {id:"afkar", n:"Afkar", m:"A", h:46, cat:"market", meta:"Al Rowad · 2020 – 2021",
+   d:"Investment platform matching founders with investors. Owners pitch running ventures or early ideas, and investors find projects to fund.",
+   t:["Investment","Marketplace"], l:[[IOS,"https://apps.apple.com/eg/app/afkar/id1525581075"],[AND,"https://play.google.com/store/apps/details?id=com.afkar"]]},
+  {id:"insure", n:"InSure", m:"iS", h:200, cat:"market", meta:"Al Rowad · 2020 – 2021",
+   d:"Consulting marketplace across many specializations. Post a request once, receive several offers from qualified advisors, and pick the right one.",
+   t:["Consulting","Offers"], l:[[IOS,"https://apps.apple.com/eg/app/insure-%D8%A7%D9%86%D8%B4%D9%88%D8%B1/id1553904022"],[AND,"https://play.google.com/store/apps/details?id=jader.sure"]]},
+  {id:"gotaxi", n:"Go Taxi", m:"GT", h:48, cat:"market", meta:"Al Rowad · 2020 – 2021",
+   d:"Ride-hailing app for everyday trips, airport runs and family visits. Book a ride in a few taps.",
+   t:["Ride-hailing","Maps & live tracking"], l:[[IOS,"https://apps.apple.com/eg/app/go-taxi-%D8%AC%D9%88-%D8%AA%D8%A7%D9%83%D8%B3%D9%8A/id1287483414"],[AND,"https://play.google.com/store/apps/details?id=com.gotaxi.user"]]},
+  {id:"gotalabat", n:"Go Talabat", m:"Gt", h:4, cat:"market", meta:"Al Rowad · 2020 – 2021",
+   d:"Food ordering and delivery. Browse nearby restaurants, build an order and follow it from the kitchen to the door.",
+   t:["Food delivery","Order tracking"], l:[[IOS,"https://apps.apple.com/eg/app/go-talabat/id1587119217"],[AND,"https://play.google.com/store/apps/details?id=com.app.go_talabat_restaurant"]]},
+  {id:"maojod", n:"Maojod", m:"Mj", h:258, cat:"market", meta:"E-commerce",
+   d:"General marketplace for top brands in electronics, fashion, beauty, perfumes, groceries, baby goods and household items.",
+   t:["E-commerce"], l:[[AND,"https://play.google.com/store/apps/details?id=com.maojod.maojod_app"]]},
+  {id:"styles", n:"Styles Creator", m:"SC", h:330, cat:"consumer", meta:"09/2021 – 03/2022",
+   d:"Virtual styling app for building outfits before buying. Position, resize and rotate clothing items on a model to preview a look, then save or publish it.",
+   t:["Gestures","Custom canvas"], l:[]},
+  {id:"altamayuz", n:"Altamayuz", m:"At", h:120, cat:"market", meta:"Membership & discounts",
+   d:"Digital membership card with discounts on daily needs across a wide merchant network, aligned with Saudi Vision 2030 quality-of-life goals.",
+   t:["Membership","Vision 2030"], l:[[AND,"https://play.google.com/store/apps/details?id=tamayouzapp.tamayouz"]]},
+  {id:"alyassirah", n:"Alyassirah", m:"Ay", h:20, cat:"market", meta:"Restaurant ordering",
+   d:"Ordering app for Al-Yassirah's Turkish restaurants: the full menu of grills, kofta and kebab, ordered ahead or delivered.",
+   t:["Food ordering"], l:[[IOS,"https://apps.apple.com/us/app/%D9%85%D8%B7%D8%A7%D8%B9%D9%85-%D8%A7%D9%84%D9%8A%D8%B3%D9%8A%D8%B1%D8%A9/id1512178854"],[AND,"https://play.google.com/store/apps/details?id=alyassirah.company.com"]]},
+  {id:"gedawy", n:"Al Gedawy Group", m:"AG", h:220, cat:"gov", meta:"Legal & business services",
+   d:"App for a legal and commercial advisory firm, covering company formation, licensing and the paperwork of setting up a business.",
+   t:["Services","Requests"], l:[]},
+  {id:"infopanies", n:"Infopanies", m:"Ip", h:250, cat:"consumer", meta:"Tech social network",
+   d:"Social network for tech companies and professionals to share where the industry is heading and work through common problems.",
+   t:["Social network"], l:[]},
+];
+const CATS = [["all","All"],["gov","Government & enterprise"],["market","Marketplaces & services"],["consumer","Consumer & social"]];
+
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const bg = h => `linear-gradient(145deg, hsl(${h} 70% 50%), hsl(${(h+28)%360} 68% 36%))`;
+const face = p => ICONS[p.id] ? `<img src="${ICONS[p.id]}" alt="" width="72" height="72">` : esc(p.m);
+const ext = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h7v7M13 3 4 12"/></svg>';
+
+function card(p){
+  const stores = p.l.length
+    ? `<div class="stores">${p.l.map(([k,u]) => `<a class="store" href="${u}" target="_blank" rel="noopener">${k}${ext}</a>`).join("")}</div>`
+    : `<div class="private">Private / enterprise build</div>`;
+  return `<article class="card" id="p-${p.id}" data-cat="${p.cat}">
+    <div class="card-top"><div class="ic" style="background:${bg(p.h)}" aria-hidden="true">${face(p)}</div>
+      <div style="min-width:0"><h3>${esc(p.n)}</h3><div class="meta">${esc(p.meta)}</div></div></div>
+    <p>${esc(p.d)}</p>
+    <div class="tags">${p.t.map(x => `<span class="tag">${esc(x)}</span>`).join("")}</div>
+    ${stores}
+  </article>`;
+}
+function appBtn(p){
+  return `<button class="app" type="button" data-go="${p.id}" aria-label="${esc(p.n)}"><span class="ic" style="background:${bg(p.h)}">${face(p)}</span><small>${esc(p.n)}</small></button>`;
+}
+
+const projEl = document.getElementById("projects");
+projEl.innerHTML = P.map(card).join("");
+document.getElementById("homeGrid").innerHTML = P.slice(4, 20).map(appBtn).join("");
+document.getElementById("dock").innerHTML = P.slice(0, 4).map(appBtn).join("");
+
+const chipsEl = document.getElementById("chips");
+chipsEl.innerHTML = CATS.map(([k,label]) => {
+  const n = k === "all" ? P.length : P.filter(p => p.cat === k).length;
+  return `<button class="chip" type="button" id="chip-${k}" data-cat="${k}" aria-pressed="${k==="all"}">${label}<span class="n">${n}</span></button>`;
+}).join("");
+
+function setFilter(cat){
+  chipsEl.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.cat === cat));
+  projEl.querySelectorAll(".card").forEach(c => { c.hidden = !(cat === "all" || c.dataset.cat === cat); });
+}
+chipsEl.addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) setFilter(b.dataset.cat); });
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]"); if (!b) return;
+  setFilter("all");
+  const el = document.getElementById("p-" + b.dataset.go);
+  el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center"});
+  el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1800);
+});
+
+document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", () => {
+  const node = document.getElementById(btn.dataset.copy), text = node.textContent.trim();
+  const done = () => { btn.textContent = "Copied"; setTimeout(() => btn.textContent = "Copy", 1500); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(node); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; setTimeout(() => btn.textContent = "Copy", 1500); };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (_) { fallback(); }
+}));
+</script>
+
+</body>
+</html>
