@@ -56,10 +56,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
 .brand{font-family:var(--f-display);font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
 .brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--accent-soft)}
-.who{display:flex;align-items:center;gap:20px;margin-top:20px}
-.who img{width:96px;height:96px;flex:none;border-radius:50%;object-fit:cover;box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--accent)}
-.hero .who h1{margin-top:0}
-@media (max-width:480px){.who{gap:14px}.who img{width:68px;height:68px}}
 .nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .nav ul a{color:var(--muted);text-decoration:none;font-size:.92rem;padding:6px 10px;border-radius:8px}
 .nav ul a:hover{color:var(--ink);background:var(--accent-soft)}
@@ -146,13 +142,18 @@ section{padding-block:72px 8px}
 .job .ships{font-size:.85rem;color:var(--muted);margin-top:8px}
 
 /* skills */
-.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:16px}
-.sk{border-top:2px solid var(--ink);padding-top:14px}
-.sk h3{font-size:1rem;font-weight:700}
-.sk ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.sk li{font-size:.85rem;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:3px 9px}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px}
+.sk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0;transition:border-color .2s}
+.sk:hover{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.sk-head{display:flex;gap:14px;align-items:flex-start}
+.sk-ic{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.sk-ic svg{width:22px;height:22px}
+.sk h3{font-size:1.08rem;font-weight:700}
+.sk p{margin:3px 0 0;font-size:.88rem;color:var(--muted);line-height:1.45}
+.sk ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.sk li{font-size:.84rem;border:1px solid var(--line);border-radius:8px;padding:4px 10px;background:var(--bg)}
 
-.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin-top:40px}
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
 .edu > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
 .edu h3{font-size:1.05rem}
 .edu p{margin:6px 0 0;color:var(--muted);font-size:.92rem}
@@ -160,6 +161,10 @@ section{padding-block:72px 8px}
 .cert{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font:600 .85rem var(--f-body);color:var(--accent);background:var(--accent-soft);padding:6px 11px;border-radius:8px;text-decoration:none}
 .cert:hover{text-decoration:underline}
 .cert svg{width:15px;height:15px}
+.who{display:flex;align-items:center;gap:20px;margin-top:20px}
+.who img{width:96px;height:96px;flex:none;border-radius:50%;object-fit:cover;box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--accent)}
+.hero .who h1{margin-top:0}
+@media (max-width:480px){.who{gap:14px}.who img{width:68px;height:68px}}
 .lang{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:.95rem}
 .lang span:last-child{color:var(--muted)}
 
@@ -312,14 +317,24 @@ footer .wrap{padding-block:18px 28px;font-size:.82rem;opacity:.6;border-top:1px 
         <h2>What I work with</h2>
       </div></div>
       <div class="skills">
-        <div class="sk"><h3>Flutter &amp; mobile</h3><ul><li>Flutter</li><li>Dart</li><li>Responsive UI</li><li>Offline storage</li><li>Push notifications</li><li>Crashlytics</li><li>Java (Android)</li></ul></div>
-        <div class="sk"><h3>State &amp; architecture</h3><ul><li>BLoC</li><li>Cubit</li><li>Provider</li><li>Riverpod</li><li>Clean architecture</li><li>Design patterns</li><li>SOLID</li><li>Dependency injection (GetIt)</li></ul></div>
-        <div class="sk"><h3>Data &amp; backend</h3><ul><li>REST APIs</li><li>WebSockets</li><li>Firebase</li><li>SQLite</li><li>Hive</li><li>SQL</li><li>MongoDB</li><li>Node.js</li><li>C#</li></ul></div>
-        <div class="sk"><h3>Quality &amp; delivery</h3><ul><li>Performance optimization</li><li>Memory management</li><li>Unit testing</li><li>Debugging</li><li>CI/CD</li><li>Git</li><li>SDLC</li></ul></div>
-        <div class="sk"><h3>Leadership</h3><ul><li>Team leadership</li><li>Mentoring</li><li>Code review</li><li>Problem solving</li><li>Critical thinking</li><li>Teamwork</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><div><h3>Flutter &amp; mobile</h3><p>Production apps from first commit to store release.</p></div></div><ul><li>Flutter</li><li>Dart</li><li>Responsive UI</li><li>Offline storage</li><li>Push notifications</li><li>Crashlytics</li><li>Platform channels</li><li>Java (Android)</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></span><div><h3>State &amp; architecture</h3><p>Codebases that stay clean as teams and features grow.</p></div></div><ul><li>BLoC</li><li>Cubit</li><li>Riverpod</li><li>Provider</li><li>Clean architecture</li><li>Design patterns</li><li>SOLID</li><li>Dependency injection (GetIt)</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></span><div><h3>Data &amp; backend</h3><p>APIs, real-time data and local storage that syncs.</p></div></div><ul><li>REST APIs</li><li>WebSockets</li><li>Firebase</li><li>SQLite</li><li>Hive</li><li>SQL</li><li>MongoDB</li><li>Node.js</li><li>C#</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5.5 5.5 5.5 9.5L15 15H9l-2.5-2.5C6.5 8.5 8.5 5 12 3z"/><circle cx="12" cy="9.5" r="1.8"/><path d="M9 15l-2 4.5 3-1.5M15 15l2 4.5-3-1.5"/></svg></span><div><h3>Quality &amp; delivery</h3><p>Fast, stable apps and a release process that holds up.</p></div></div><ul><li>Performance optimization</li><li>Memory management</li><li>CI/CD</li><li>Unit testing</li><li>Widget testing</li><li>Integration testing</li><li>Debugging</li><li>Git</li><li>SDLC</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c.6-3.2 3-5 6-5s5.4 1.8 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.6c2.3.2 4 1.7 4.5 4.4"/></svg></span><div><h3>Leadership</h3><p>Leading mobile teams and growing developers.</p></div></div><ul><li>Team leadership</li><li>Mentoring</li><li>Code review</li><li>Problem solving</li><li>Critical thinking</li><li>Teamwork</li></ul></div>
+        <div class="sk"><div class="sk-head"><span class="sk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="13" height="10" rx="1.5"/><path d="M6 18h6M9 14v4"/><rect x="16.5" y="9" width="5" height="10" rx="1.2"/></svg></span><div><h3>Platforms</h3><p>One Flutter codebase across every screen.</p></div></div><ul><li>iOS</li><li>Android</li><li>Web</li><li>Desktop</li></ul></div>
       </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Education</div>
+        <h2>Education &amp; languages</h2>
+      </div></div>
       <div class="edu">
-        <div><div class="eyebrow">Education</div><h3 style="margin-top:8px">Bachelor of Computer Science</h3><p>6 October University · 2015 – 2019</p><p class="grade">Excellent with Honors · 86.47%</p><a class="cert" href="bachelor-certificate.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="2" width="11" height="9" rx="1.5"/><path d="M5.5 11.5v3l2.5-1.3 2.5 1.3v-3"/></svg>View certificate</a></div>
+        <div><div class="eyebrow">Education</div><h3 style="margin-top:8px">Bachelor of Computer Science</h3><p>6 October University · 2015 – 2019</p><p class="grade">Excellent with Honors</p><a class="cert" href="bachelor-certificate.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="2" width="11" height="9" rx="1.5"/><path d="M5.5 11.5v3l2.5-1.3 2.5 1.3v-3"/></svg>View certificate</a></div>
         <div><div class="eyebrow">Training</div><h3 style="margin-top:8px">Front End &amp; Cross-Platform Mobile Development</h3><p>Information Technology Institute (ITI)</p><a class="cert" href="iti-certificate.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="2" width="11" height="9" rx="1.5"/><path d="M5.5 11.5v3l2.5-1.3 2.5 1.3v-3"/></svg>View certificate</a></div>
         <div><div class="eyebrow">Languages</div><div class="lang"><span>Arabic</span><span>Native</span></div><div class="lang"><span>English</span><span>Proficient</span></div></div>
       </div>
